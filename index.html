@@ -359,7 +359,8 @@
 
         .about-image {
             position: relative;
-            max-width: 300px;
+            max-width: 280px;
+            aspect-ratio: 4672 / 6065;  /* ← NEW: Matches your photo ratio */
         }
 
         .about-image::before {
@@ -368,8 +369,8 @@
             width: 100%;
             height: 100%;
             border: 2px solid var(--green);
-            top: 20px;
-            left: 20px;
+            top: 10px;
+            left: 10px;
             border-radius: 4px;
             z-index: -1;
             transition: all 0.3s ease;
@@ -382,6 +383,8 @@
 
         .about-image img {
             width: 100%;
+            height: 100%;
+            object-fit: cover;
             border-radius: 4px;
             filter: grayscale(100%);
             mix-blend-mode: multiply;
