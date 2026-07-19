@@ -1,944 +1,1729 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dipesh Kunwar - Frontend Developer</title>
-    <meta name="description" content="Portfolio of Dipesh Kunwar — frontend developer building accessible, responsive, and modern web applications with JavaScript, TypeScript, and Java.">
-    <meta name="theme-color" content="#0a192f">
-    <meta property="og:title" content="Dipesh Kunwar - Frontend Developer">
-    <meta property="og:description" content="Portfolio of Dipesh Kunwar — frontend developer building accessible, responsive, and modern web applications.">
-    <meta property="og:type" content="website">
-    <meta property="og:image" content="portfolio.png">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        :root {
-            --navy: #0a192f;
-            --light-navy: #112240;
-            --lightest-navy: #233554;
-            --slate: #8892b0;
-            --light-slate: #a8b2d1;
-            --lightest-slate: #ccd6f6;
-            --white: #e6f1ff;
-            --green: #64ffda;
-            --green-tint: rgba(100, 255, 218, 0.1);
-            --font-mono: 'SF Mono', 'Fira Code', 'Fira Mono', 'Roboto Mono', monospace;
-            --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            font-family: var(--font-sans);
-            background-color: var(--navy);
-            color: var(--slate);
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
-
-        ::selection {
-            background-color: var(--lightest-navy);
-            color: var(--lightest-slate);
-        }
-
-        /* Accessibility: visible focus outlines */
-        a:focus-visible,
-        button:focus-visible {
-            outline: 2px dashed var(--green);
-            outline-offset: 3px;
-        }
-
-        /* Skip to content link */
-        .skip-link {
-            position: absolute;
-            left: -9999px;
-            top: auto;
-            width: 1px;
-            height: 1px;
-            overflow: hidden;
-        }
-
-        .skip-link:focus {
-            position: fixed;
-            left: 20px;
-            top: 20px;
-            width: auto;
-            height: auto;
-            padding: 10px 14px;
-            background: var(--light-navy);
-            color: var(--lightest-slate);
-            border: 1px solid var(--green);
-            border-radius: 4px;
-            z-index: 10000;
-        }
-
-        /* ============================================
-           TWO-COLUMN STICKY LAYOUT
-           ============================================ */
-        .layout {
-            display: flex;
-            justify-content: space-between;
-            max-width: 1280px;
-            margin: 0 auto;
-            padding: 0 100px;
-            min-height: 100vh;
-        }
-
-        /* LEFT COLUMN - Sticky Sidebar */
-        .sidebar {
-            position: sticky;
-            top: 0;
-            height: 100vh;
-            width: 45%;
-            max-width: 480px;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            padding: 100px 0;
-        }
-
-        .sidebar-header {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .sidebar-name {
-            font-size: clamp(40px, 5vw, 48px);
-            font-weight: 700;
-            color: var(--lightest-slate);
-            line-height: 1.1;
-            margin-bottom: 8px;
-        }
-
-        .sidebar-title {
-            font-size: clamp(18px, 2.5vw, 20px);
-            font-weight: 500;
-            color: var(--lightest-slate);
-            margin-bottom: 16px;
-        }
-
-        .sidebar-tagline {
-            font-size: 16px;
-            color: var(--slate);
-            max-width: 300px;
-            line-height: 1.5;
-        }
-
-        /* Navigation */
-        .sidebar-nav {
-            margin-top: 64px;
-        }
-
-        .nav-list {
-            list-style: none;
-            padding: 0;
-        }
-
-        .nav-item {
-            margin-bottom: 12px;
-        }
-
-        .nav-link {
-            display: inline-flex;
-            align-items: center;
-            gap: 12px;
-            color: var(--slate);
-            text-decoration: none;
-            font-size: 12px;
-            font-weight: 600;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-            padding: 8px 0;
-            transition: all 0.25s ease;
-        }
-
-        .nav-link::before {
-            content: '';
-            display: inline-block;
-            width: 32px;
-            height: 1px;
-            background-color: var(--slate);
-            transition: all 0.25s ease;
-        }
-
-        .nav-link:hover,
-        .nav-link.active {
-            color: var(--lightest-slate);
-        }
-
-        .nav-link:hover::before,
-        .nav-link.active::before {
-            width: 64px;
-            background-color: var(--lightest-slate);
-        }
-
-        .nav-link.active {
-            color: var(--green);
-        }
-
-        .nav-link.active::before {
-            background-color: var(--green);
-        }
-
-        /* Social Links */
-        .sidebar-social {
-            display: flex;
-            align-items: center;
-            gap: 24px;
-            margin-top: auto;
-        }
-
-        .social-link {
-            color: var(--slate);
-            text-decoration: none;
-            transition: all 0.25s ease;
-        }
-
-        .social-link:hover {
-            color: var(--green);
-            transform: translateY(-3px);
-        }
-
-        .social-link svg {
-            width: 22px;
-            height: 22px;
-        }
-
-        /* RIGHT COLUMN - Scrollable Content */
-        .main-content {
-            width: 55%;
-            padding: 100px 0;
-        }
-
-        /* Section Styles */
-        section {
-            margin-bottom: 100px;
-            scroll-margin-top: 100px;
-        }
-
-        section:last-of-type {
-            margin-bottom: 0;
-        }
-
-        .section-heading {
-            display: flex;
-            align-items: center;
-            margin-bottom: 40px;
-            font-size: clamp(24px, 3vw, 28px);
-            color: var(--lightest-slate);
-            font-weight: 600;
-            white-space: nowrap;
-        }
-
-        .section-heading .num {
-            color: var(--green);
-            font-family: var(--font-mono);
-            font-size: 18px;
-            font-weight: 400;
-            margin-right: 10px;
-        }
-
-        .section-heading::after {
-            content: '';
-            display: block;
-            width: 100%;
-            max-width: 300px;
-            height: 1px;
-            margin-left: 20px;
-            background-color: var(--lightest-navy);
-        }
-
-        /* About Section */
-        .about-content p {
-            margin-bottom: 16px;
-            font-size: 16px;
-            line-height: 1.7;
-            color: var(--slate);
-        }
-
-        .about-content a {
-            color: var(--green);
-            text-decoration: none;
-            transition: all 0.25s ease;
-        }
-
-        .about-content a:hover {
-            text-decoration: underline;
-        }
-
-        .about-content strong {
-            color: var(--lightest-slate);
-            font-weight: 500;
-        }
-
-        /* Tech Pills Grid */
-        .tech-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 8px 16px;
-            margin-top: 24px;
-            list-style: none;
-            padding: 0;
-        }
-
-        .tech-item {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-family: var(--font-mono);
-            font-size: 13px;
-            color: var(--slate);
-        }
-
-        .tech-item::before {
-            content: '▹';
-            color: var(--green);
-            font-size: 12px;
-        }
-
-        /* Experience Section */
-        .experience-list {
-            display: flex;
-            flex-direction: column;
-            gap: 48px;
-        }
-
-        .experience-item {
-            display: grid;
-            grid-template-columns: 120px 1fr;
-            gap: 24px;
-            padding: 24px;
-            border-radius: 4px;
-            transition: all 0.25s ease;
-        }
-
-        .experience-item:hover {
-            background-color: rgba(100, 255, 218, 0.05);
-        }
-
-        .experience-date {
-            font-family: var(--font-mono);
-            font-size: 12px;
-            color: var(--slate);
-            font-weight: 500;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            padding-top: 4px;
-        }
-
-        .experience-content h3 {
-            font-size: 18px;
-            font-weight: 500;
-            color: var(--lightest-slate);
-            margin-bottom: 8px;
-        }
-
-        .experience-content h3 a {
-            color: var(--lightest-slate);
-            text-decoration: none;
-            transition: color 0.25s ease;
-        }
-
-        .experience-content h3 a:hover {
-            color: var(--green);
-        }
-
-        .experience-content h3 .company {
-            color: var(--green);
-        }
-
-        .experience-content p {
-            font-size: 14px;
-            line-height: 1.6;
-            color: var(--slate);
-            margin-bottom: 16px;
-        }
-
-        .experience-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            list-style: none;
-            padding: 0;
-        }
-
-        .experience-tag {
-            font-family: var(--font-mono);
-            font-size: 11px;
-            color: var(--green);
-            background-color: var(--green-tint);
-            border-radius: 999px;
-            padding: 4px 12px;
-        }
-
-        .resume-link {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            margin-top: 32px;
-            color: var(--green);
-            font-family: var(--font-mono);
-            font-size: 14px;
-            text-decoration: none;
-            transition: all 0.25s ease;
-        }
-
-        .resume-link:hover {
-            text-decoration: underline;
-            gap: 12px;
-        }
-
-        .resume-link svg {
-            width: 16px;
-            height: 16px;
-        }
-
-        /* Projects Section */
-        .projects-list {
-            display: flex;
-            flex-direction: column;
-            gap: 48px;
-        }
-
-        .project-card {
-            padding: 24px;
-            border-radius: 4px;
-            transition: all 0.25s ease;
-            position: relative;
-        }
-
-        .project-card:hover {
-            background-color: rgba(100, 255, 218, 0.05);
-        }
-
-        .project-label {
-            font-family: var(--font-mono);
-            font-size: 12px;
-            color: var(--green);
-            margin-bottom: 8px;
-        }
-
-        .project-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            margin-bottom: 16px;
-        }
-
-        .project-title {
-            font-size: 20px;
-            font-weight: 600;
-            color: var(--lightest-slate);
-        }
-
-        .project-title a {
-            color: var(--lightest-slate);
-            text-decoration: none;
-            transition: color 0.25s ease;
-        }
-
-        .project-title a:hover {
-            color: var(--green);
-        }
-
-        .project-links {
-            display: flex;
-            gap: 16px;
-        }
-
-        .project-link {
-            color: var(--light-slate);
-            transition: color 0.25s ease;
-        }
-
-        .project-link:hover {
-            color: var(--green);
-        }
-
-        .project-link svg {
-            width: 20px;
-            height: 20px;
-        }
-
-        .project-description {
-            font-size: 14px;
-            line-height: 1.6;
-            color: var(--slate);
-            margin-bottom: 16px;
-        }
-
-        .project-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            list-style: none;
-            padding: 0;
-        }
-
-        .project-tag {
-            font-family: var(--font-mono);
-            font-size: 11px;
-            color: var(--green);
-            background-color: var(--green-tint);
-            border-radius: 999px;
-            padding: 4px 12px;
-        }
-
-        /* Footer */
-        footer {
-            padding: 60px 0 24px;
-            text-align: center;
-        }
-
-        .footer-text {
-            font-family: var(--font-mono);
-            font-size: 12px;
-            color: var(--slate);
-        }
-
-        /* Fade-in Animation */
-        .fade-section {
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.6s ease, transform 0.6s ease;
-        }
-
-        .fade-section.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* ============================================
-           RESPONSIVE DESIGN
-           ============================================ */
-        @media (max-width: 1080px) {
-            .layout {
-                padding: 0 50px;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .layout {
-                flex-direction: column;
-                padding: 0 25px;
-            }
-
-            .sidebar {
-                position: relative;
-                width: 100%;
-                max-width: none;
-                height: auto;
-                padding: 48px 0 32px;
-            }
-
-            .sidebar-nav {
-                margin-top: 32px;
-            }
-
-            .nav-list {
-                display: flex;
-                flex-wrap: wrap;
-                gap: 8px 24px;
-            }
-
-            .nav-item {
-                margin-bottom: 0;
-            }
-
-            .nav-link::before {
-                display: none;
-            }
-
-            .sidebar-social {
-                margin-top: 32px;
-            }
-
-            .main-content {
-                width: 100%;
-                padding: 32px 0 64px;
-            }
-
-            section {
-                margin-bottom: 64px;
-            }
-
-            .experience-item {
-                grid-template-columns: 1fr;
-                gap: 8px;
-            }
-
-            .experience-date {
-                padding-top: 0;
-            }
-
-            .section-heading::after {
-                max-width: 100%;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .layout {
-                padding: 0 20px;
-            }
-
-            .sidebar-name {
-                font-size: 32px;
-            }
-
-            .sidebar-title {
-                font-size: 16px;
-            }
-
-            .section-heading {
-                font-size: 20px;
-            }
-
-            .section-heading .num {
-                font-size: 14px;
-            }
-
-            .tech-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .experience-item,
-            .project-card {
-                padding: 16px;
-            }
-        }
-
-        /* Respect users who prefer reduced motion */
-        @media (prefers-reduced-motion: reduce) {
-            *,
-            *::before,
-            *::after {
-                animation-duration: 0.01ms !important;
-                animation-iteration-count: 1 !important;
-                transition-duration: 0.01ms !important;
-                scroll-behavior: auto !important;
-            }
-
-            .fade-section {
-                opacity: 1;
-                transform: none;
-            }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dipesh Kunwar — Frontend Developer</title>
+<meta name="description" content="Portfolio of Dipesh Kunwar — frontend developer building accessible, performant, and visually compelling web applications.">
+<meta name="theme-color" content="#0a0f1e">
+<meta property="og:title" content="Dipesh Kunwar — Frontend Developer">
+<meta property="og:description" content="Frontend developer building accessible, performant interfaces for the web.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* =============================================
+   DESIGN TOKENS
+   ============================================= */
+:root {
+  --navy:           #0a0f1e;
+  --navy-2:         #0d1428;
+  --navy-3:         #111d35;
+  --navy-4:         #162040;
+  --slate:          #7a8499;
+  --slate-light:    #9ba3b8;
+  --slate-lighter:  #c8d0e7;
+  --white:          #e8f0ff;
+  --green:          #4af2c8;
+  --green-dim:      #2dd4a8;
+  --green-tint:     rgba(74,242,200,0.08);
+  --green-tint-2:   rgba(74,242,200,0.15);
+  --purple:         #a78bfa;
+  --purple-tint:    rgba(167,139,250,0.08);
+  --border:         rgba(200,208,231,0.07);
+  --border-hover:   rgba(74,242,200,0.2);
+  --font-sans:      'Inter', system-ui, sans-serif;
+  --font-mono:      'JetBrains Mono', monospace;
+  --ease-out:       cubic-bezier(0.16,1,0.3,1);
+  --ease-spring:    cubic-bezier(0.34,1.56,0.64,1);
+}
+
+/* =============================================
+   RESET & BASE
+   ============================================= */
+*,*::before,*::after { margin:0; padding:0; box-sizing:border-box; }
+
+html { scroll-behavior:smooth; font-size:16px; }
+
+body {
+  font-family: var(--font-sans);
+  background: var(--navy);
+  color: var(--slate);
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection { background: var(--green-tint-2); color: var(--green); }
+
+a:focus-visible, button:focus-visible {
+  outline: 2px dashed var(--green);
+  outline-offset: 3px;
+  border-radius: 3px;
+}
+
+/* =============================================
+   CANVAS BACKGROUND — hero particle field
+   ============================================= */
+#hero-canvas {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 1.2s ease;
+}
+#hero-canvas.ready { opacity: 1; }
+
+/* Radial vignette over canvas */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(ellipse at 30% 40%, transparent 40%, rgba(10,15,30,0.85) 100%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* =============================================
+   SKIP LINK
+   ============================================= */
+.skip-link {
+  position: absolute;
+  left: -9999px; top: auto;
+  width: 1px; height: 1px;
+  overflow: hidden;
+}
+.skip-link:focus {
+  position: fixed;
+  left: 20px; top: 20px;
+  width: auto; height: auto;
+  padding: 10px 16px;
+  background: var(--navy-3);
+  color: var(--white);
+  border: 1px solid var(--green);
+  border-radius: 6px;
+  z-index: 10000;
+  font-size: 14px;
+}
+
+/* =============================================
+   LAYOUT — two-column sticky
+   ============================================= */
+.layout {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  justify-content: space-between;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 80px;
+  min-height: 100vh;
+}
+
+/* =============================================
+   SIDEBAR — sticky left column
+   ============================================= */
+.sidebar {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  width: 44%;
+  max-width: 420px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 80px 0;
+}
+
+.sidebar-header { display: flex; flex-direction: column; }
+
+.sidebar-name {
+  font-size: clamp(36px,4.5vw,52px);
+  font-weight: 700;
+  color: var(--white);
+  line-height: 1.05;
+  letter-spacing: -1.5px;
+  margin-bottom: 10px;
+}
+
+.sidebar-title {
+  font-size: clamp(16px,2vw,20px);
+  font-weight: 400;
+  color: var(--slate-lighter);
+  margin-bottom: 18px;
+  font-family: var(--font-mono);
+  letter-spacing: 0.02em;
+}
+
+/* Typewriter cursor on title */
+.sidebar-title .cursor {
+  display: inline-block;
+  width: 2px; height: 1em;
+  background: var(--green);
+  margin-left: 3px;
+  vertical-align: middle;
+  animation: blink 1s step-end infinite;
+}
+@keyframes blink { 50% { opacity:0; } }
+
+.sidebar-tagline {
+  font-size: 15px;
+  color: var(--slate);
+  max-width: 320px;
+  line-height: 1.6;
+}
+
+/* ---- NAV ---- */
+.sidebar-nav { margin-top: 52px; }
+.nav-list { list-style: none; }
+.nav-item { margin-bottom: 6px; }
+
+.nav-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  color: var(--slate);
+  text-decoration: none;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 10px 0;
+  transition: color 0.25s ease;
+  position: relative;
+}
+.nav-line {
+  display: inline-block;
+  width: 32px; height: 1px;
+  background: var(--slate);
+  transition: width 0.35s var(--ease-out), background 0.25s ease;
+}
+.nav-link:hover .nav-line,
+.nav-link.active .nav-line {
+  width: 72px;
+}
+.nav-link:hover { color: var(--slate-lighter); }
+.nav-link.active { color: var(--white); }
+.nav-link.active .nav-line { background: var(--green); }
+
+/* ---- SOCIAL ---- */
+.sidebar-social {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  margin-top: auto;
+  padding-top: 40px;
+}
+
+.social-link {
+  color: var(--slate);
+  text-decoration: none;
+  transition: color 0.25s ease, transform 0.25s var(--ease-spring);
+  display: flex;
+}
+.social-link:hover { color: var(--green); transform: translateY(-4px); }
+.social-link svg { width: 21px; height: 21px; }
+
+/* =============================================
+   MAIN CONTENT — scrollable right column
+   ============================================= */
+.main-content {
+  width: 56%;
+  padding: 80px 0 80px 40px;
+}
+
+/* Section */
+section {
+  margin-bottom: 120px;
+  scroll-margin-top: 80px;
+}
+
+/* Reveal animation */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.7s var(--ease-out), transform 0.7s var(--ease-out);
+}
+.reveal.in { opacity: 1; transform: translateY(0); }
+.reveal.delay-1 { transition-delay: 0.1s; }
+.reveal.delay-2 { transition-delay: 0.2s; }
+.reveal.delay-3 { transition-delay: 0.3s; }
+
+/* Section heading */
+.section-heading {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 40px;
+  white-space: nowrap;
+}
+.section-heading .num {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--green);
+  font-weight: 400;
+}
+.section-heading .title {
+  font-size: clamp(20px,2.5vw,26px);
+  font-weight: 600;
+  color: var(--white);
+  letter-spacing: -0.3px;
+}
+.section-heading::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+  max-width: 260px;
+}
+
+/* =============================================
+   ABOUT SECTION
+   ============================================= */
+.about-content p {
+  font-size: 15px;
+  line-height: 1.75;
+  color: var(--slate);
+  margin-bottom: 18px;
+}
+.about-content a {
+  color: var(--green);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(74,242,200,0.3);
+  transition: border-color 0.2s;
+}
+.about-content a:hover { border-color: var(--green); }
+.about-content strong { color: var(--slate-lighter); font-weight: 500; }
+
+/* Tech grid */
+.tech-grid {
+  display: grid;
+  grid-template-columns: repeat(2,1fr);
+  gap: 8px 20px;
+  margin-top: 24px;
+  list-style: none;
+}
+.tech-item {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  font-family: var(--font-mono);
+  font-size: 12.5px;
+  color: var(--slate-light);
+}
+.tech-item::before {
+  content: '▹';
+  color: var(--green);
+  font-size: 11px;
+  flex-shrink: 0;
+}
+
+/* =============================================
+   EXPERIENCE SECTION
+   ============================================= */
+.experience-list { display: flex; flex-direction: column; gap: 4px; }
+
+.experience-item {
+  display: grid;
+  grid-template-columns: 110px 1fr;
+  gap: 20px;
+  padding: 20px 18px;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  transition: background 0.3s ease, border-color 0.3s ease, transform 0.3s var(--ease-out);
+  cursor: default;
+}
+.experience-item:hover {
+  background: var(--navy-3);
+  border-color: var(--border-hover);
+  transform: translateX(4px);
+}
+
+.experience-date {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--slate);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  padding-top: 3px;
+  white-space: nowrap;
+}
+
+.experience-content h3 {
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--slate-lighter);
+  margin-bottom: 10px;
+  transition: color 0.25s;
+}
+.experience-item:hover .experience-content h3 { color: var(--white); }
+
+.experience-content h3 a {
+  color: inherit;
+  text-decoration: none;
+  transition: color 0.25s;
+}
+.experience-content h3 a:hover { color: var(--green); }
+.company { color: var(--green); }
+
+.experience-content p {
+  font-size: 13.5px;
+  line-height: 1.65;
+  color: var(--slate);
+  margin-bottom: 14px;
+}
+
+.tag-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  list-style: none;
+}
+.tag {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  color: var(--green);
+  background: var(--green-tint);
+  border-radius: 999px;
+  padding: 3px 11px;
+  letter-spacing: 0.03em;
+  transition: background 0.2s;
+}
+.experience-item:hover .tag { background: var(--green-tint-2); }
+
+/* Resume link */
+.resume-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  margin-top: 28px;
+  color: var(--green);
+  font-family: var(--font-mono);
+  font-size: 13px;
+  text-decoration: none;
+  border: 1px solid rgba(74,242,200,0.3);
+  padding: 11px 20px;
+  border-radius: 6px;
+  transition: all 0.25s ease;
+}
+.resume-link:hover {
+  background: var(--green-tint);
+  border-color: var(--green);
+  gap: 14px;
+}
+.resume-link svg { width: 15px; height: 15px; }
+
+/* =============================================
+   PROJECTS SECTION
+   ============================================= */
+.projects-list { display: flex; flex-direction: column; gap: 6px; }
+
+.project-card {
+  padding: 22px 20px;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  transition: background 0.3s, border-color 0.3s, transform 0.3s var(--ease-out);
+  position: relative;
+}
+.project-card:hover {
+  background: var(--navy-3);
+  border-color: var(--border-hover);
+  transform: translateX(4px);
+}
+
+.project-label {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  color: var(--green);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+.project-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.project-title {
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--slate-lighter);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: color 0.25s;
+}
+.project-card:hover .project-title { color: var(--white); }
+
+.project-title a {
+  color: inherit;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: color 0.25s;
+}
+.project-title a:hover { color: var(--green); }
+/* arrow icon on title */
+.project-title a::after {
+  content: '↗';
+  font-size: 14px;
+  opacity: 0;
+  transform: translate(-4px, 4px);
+  transition: opacity 0.25s, transform 0.25s var(--ease-out);
+  color: var(--green);
+}
+.project-card:hover .project-title a::after {
+  opacity: 1;
+  transform: translate(0, 0);
+}
+
+.project-links {
+  display: flex;
+  gap: 14px;
+  flex-shrink: 0;
+}
+.project-link {
+  color: var(--slate);
+  transition: color 0.25s, transform 0.25s var(--ease-spring);
+  display: flex;
+}
+.project-link:hover { color: var(--green); transform: translateY(-2px); }
+.project-link svg { width: 19px; height: 19px; }
+
+.project-description {
+  font-size: 13.5px;
+  line-height: 1.65;
+  color: var(--slate);
+  margin-bottom: 16px;
+}
+
+/* ---- CASE STUDY (Cinema Booking) ---- */
+.case-study {
+  margin-top: 18px;
+  border-top: 1px solid var(--border);
+  padding-top: 18px;
+}
+.case-study-label {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--purple);
+  margin-bottom: 14px;
+}
+.case-study-grid {
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  gap: 10px;
+}
+.case-tile {
+  background: var(--navy-4);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 12px 14px;
+  transition: border-color 0.25s;
+}
+.project-card:hover .case-tile { border-color: rgba(167,139,250,0.2); }
+.case-tile-label {
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--slate);
+  margin-bottom: 6px;
+}
+.case-tile-val {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--purple);
+  line-height: 1;
+}
+.case-tile-desc {
+  font-size: 11px;
+  color: var(--slate);
+  margin-top: 4px;
+}
+.case-steps {
+  display: flex;
+  gap: 0;
+  margin-top: 12px;
+  border-radius: 6px;
+  overflow: hidden;
+}
+.case-step {
+  flex: 1;
+  padding: 9px 10px;
+  background: var(--navy-4);
+  border-right: 1px solid var(--border);
+  font-size: 11px;
+  color: var(--slate-light);
+  text-align: center;
+  position: relative;
+}
+.case-step:last-child { border-right: none; }
+.case-step-num {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 9px;
+  color: var(--purple);
+  margin-bottom: 3px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+/* Arrow between steps */
+.case-step:not(:last-child)::after {
+  content: '→';
+  position: absolute;
+  right: -8px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--border);
+  font-size: 12px;
+  z-index: 1;
+}
+
+/* =============================================
+   FLOATING CONTACT CTA
+   ============================================= */
+#float-cta {
+  position: fixed;
+  bottom: 32px;
+  right: 32px;
+  z-index: 100;
+  opacity: 0;
+  transform: translateY(20px) scale(0.92);
+  transition: opacity 0.45s var(--ease-out), transform 0.45s var(--ease-spring);
+  pointer-events: none;
+}
+#float-cta.show {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  pointer-events: auto;
+}
+.float-cta-btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--navy-3);
+  border: 1px solid rgba(74,242,200,0.35);
+  border-radius: 999px;
+  padding: 12px 22px;
+  color: var(--green);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 500;
+  text-decoration: none;
+  cursor: pointer;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.5), 0 0 0 1px rgba(74,242,200,0.05);
+  transition: background 0.25s, border-color 0.25s, transform 0.25s var(--ease-spring), box-shadow 0.25s;
+  letter-spacing: 0.04em;
+}
+.float-cta-btn:hover {
+  background: var(--green-tint-2);
+  border-color: var(--green);
+  transform: scale(1.04);
+  box-shadow: 0 12px 40px rgba(74,242,200,0.15), 0 0 0 1px rgba(74,242,200,0.1);
+}
+.float-cta-btn span.arrow {
+  font-size: 14px;
+  transition: transform 0.25s var(--ease-spring);
+}
+.float-cta-btn:hover span.arrow { transform: translateX(3px); }
+
+/* =============================================
+   FOOTER
+   ============================================= */
+footer {
+  padding: 56px 0 24px;
+  text-align: center;
+}
+.footer-text {
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  color: var(--slate);
+}
+.footer-text a {
+  color: var(--green);
+  text-decoration: none;
+}
+.footer-text a:hover { text-decoration: underline; }
+
+/* =============================================
+   SCROLLBAR STYLING
+   ============================================= */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--navy); }
+::-webkit-scrollbar-thumb {
+  background: var(--navy-4);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover { background: var(--slate); }
+
+/* =============================================
+   MUSIC TOGGLE BUTTON
+   ============================================= */
+.music-toggle-btn {
+  position: fixed;
+  bottom: 96px;
+  right: 32px;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--navy-3);
+  border: 1px solid rgba(74,242,200,0.2);
+  border-radius: 999px;
+  padding: 10px 18px;
+  color: var(--slate);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  transition: all 0.3s var(--ease-spring);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+
+.music-toggle-btn:hover {
+  border-color: var(--green);
+  color: var(--green);
+  transform: translateY(-2px);
+}
+
+.music-toggle-btn.is-playing {
+  border-color: var(--green);
+  color: var(--green);
+  background: var(--green-tint);
+}
+
+/* Equalizer Animation */
+.equalizer {
+  display: flex;
+  align-items: flex-end;
+  gap: 2px;
+  height: 12px;
+}
+.equalizer .bar {
+  width: 3px;
+  background-color: var(--slate);
+  border-radius: 2px;
+  transition: background-color 0.3s;
+}
+/* Static state (muted) */
+.equalizer .bar:nth-child(1) { height: 4px; }
+.equalizer .bar:nth-child(2) { height: 8px; }
+.equalizer .bar:nth-child(3) { height: 6px; }
+
+/* Playing state */
+.music-toggle-btn.is-playing .equalizer .bar {
+  background-color: var(--green);
+  animation: eq-bounce 0.8s infinite alternate ease-in-out;
+}
+.music-toggle-btn.is-playing .equalizer .bar:nth-child(1) { animation-delay: 0.1s; }
+.music-toggle-btn.is-playing .equalizer .bar:nth-child(2) { animation-delay: 0.4s; }
+.music-toggle-btn.is-playing .equalizer .bar:nth-child(3) { animation-delay: 0.2s; }
+
+@keyframes eq-bounce {
+  0% { height: 4px; }
+  100% { height: 12px; }
+}
+
+/* Responsive adjustment for small screens */
+@media (max-width: 768px) {
+  .music-toggle-btn { bottom: 20px; left: 16px; padding: 8px 14px; }
+  /* Adjust mascot position if it overlaps with the button */
+  #mascot { bottom: 70px; left: 16px; } 
+}
+
+/* =============================================
+   FLOATING MASCOT
+   ============================================= */
+#mascot {
+  position: fixed;
+  bottom: 40px;
+  left: 40px;
+  z-index: 100;
+  pointer-events: none; /* Prevents blocking clicks */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: floatMascot 3s ease-in-out infinite;
+  transition: transform 0.3s var(--ease-spring);
+}
+
+.mascot-body {
+  width: 56px;
+  height: 50px;
+  background: var(--navy-3);
+  border: 2px solid var(--green);
+  border-radius: 40% 40% 45% 45%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 10px 25px rgba(74, 242, 200, 0.15);
+}
+
+.mascot-eyes {
+  display: flex;
+  gap: 12px;
+  margin-top: -4px;
+}
+
+.m-eye {
+  width: 7px;
+  height: 7px;
+  background: var(--green);
+  border-radius: 50%;
+  animation: blinkMascot 4s infinite;
+  transition: all 0.2s;
+}
+
+.mascot-mouth {
+  width: 10px;
+  height: 3px;
+  border: 2px solid var(--green);
+  border-top: none;
+  border-radius: 0 0 10px 10px;
+  margin-top: 6px;
+  transition: all 0.2s var(--ease-spring);
+}
+
+/* -- Hands -- */
+.mascot-hand {
+  width: 12px;
+  height: 12px;
+  background: var(--navy-3);
+  border: 2px solid var(--green);
+  border-radius: 50%;
+  position: absolute;
+  top: 26px;
+  transition: all 0.3s var(--ease-spring);
+}
+.mascot-hand.left { left: -8px; }
+.mascot-hand.right { right: -8px; transform-origin: left center; }
+
+/* -- Legs -- */
+.mascot-leg {
+  width: 12px;
+  height: 16px;
+  background: var(--navy-3);
+  border: 2px solid var(--green);
+  border-radius: 10px; /* Cute pill shape */
+  position: absolute;
+  bottom: -10px;
+  z-index: -1; /* Tucks them neatly behind the body curve */
+  transition: all 0.3s var(--ease-spring);
+}
+.mascot-leg.left { left: 12px; }
+.mascot-leg.right { right: 12px; }
+
+/* -- Idle Animations -- */
+@keyframes floatMascot {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+@keyframes blinkMascot {
+  0%, 95%, 98%, 100% { transform: scaleY(1); }
+  96%, 99% { transform: scaleY(0.1); }
+}
+
+/* -- Hover State (Smile, Wave & Dangle Legs) -- */
+#mascot.is-hovering {
+  transform: translateY(-5px) scale(1.05);
+}
+#mascot.is-hovering .mascot-mouth {
+  width: 16px;
+  height: 8px;
+  border-radius: 0 0 20px 20px;
+}
+#mascot.is-hovering .m-eye {
+  transform: scale(1.2);
+}
+#mascot.is-hovering .mascot-hand.right {
+  transform: translateY(-16px) rotate(20deg);
+  animation: waveMascot 0.4s infinite alternate;
+}
+/* Legs kick out slightly when excited */
+#mascot.is-hovering .mascot-leg.left {
+  transform: rotate(15deg) translateY(-2px);
+}
+#mascot.is-hovering .mascot-leg.right {
+  transform: rotate(-15deg) translateY(-2px);
+}
+@keyframes waveMascot {
+  0% { transform: translateY(-16px) rotate(10deg); }
+  100% { transform: translateY(-16px) rotate(45deg); }
+}
+
+/* -- Click State (Jump, Squint & Tuck Legs) -- */
+#mascot.is-clicking {
+  transform: translateY(-25px) scale(0.95);
+  animation: none; /* Stops floating while jumping */
+}
+#mascot.is-clicking .m-eye {
+  height: 3px;
+  border-radius: 10px 10px 0 0;
+  transform: translateY(2px);
+}
+#mascot.is-clicking .mascot-mouth {
+  width: 18px;
+  height: 10px;
+}
+#mascot.is-clicking .mascot-hand {
+  transform: translateY(-12px);
+}
+/* Legs tuck upwards into the body when jumping */
+#mascot.is-clicking .mascot-leg {
+  transform: translateY(-8px);
+  height: 10px; 
+}
+
+/* =============================================
+   LOADING FADE-IN
+   ============================================= */
+.page-loaded .sidebar-header > * {
+  animation: slideUp 0.7s var(--ease-out) both;
+}
+.page-loaded .sidebar-header > *:nth-child(1) { animation-delay: 0.1s; }
+.page-loaded .sidebar-header > *:nth-child(2) { animation-delay: 0.2s; }
+.page-loaded .sidebar-header > *:nth-child(3) { animation-delay: 0.3s; }
+.page-loaded .sidebar-header > *:nth-child(4) { animation-delay: 0.4s; }
+.page-loaded .sidebar-social { animation: slideUp 0.7s var(--ease-out) 0.55s both; }
+
+@keyframes slideUp {
+  from { opacity:0; transform: translateY(18px); }
+  to   { opacity:1; transform: translateY(0); }
+}
+
+/* =============================================
+   RESPONSIVE
+   ============================================= */
+@media (max-width: 1100px) {
+  .layout { padding: 0 48px; }
+  #mascot { display: none; }
+}
+
+@media (max-width: 768px) {
+  .layout { flex-direction: column; padding: 0 28px; }
+  .sidebar {
+    position: relative;
+    width: 100%; max-width: none;
+    height: auto;
+    padding: 56px 0 28px;
+  }
+  .sidebar-nav { margin-top: 28px; }
+  .nav-list { display: flex; flex-wrap: wrap; gap: 4px 20px; }
+  .nav-item { margin-bottom: 0; }
+  .nav-line { display: none; }
+  .nav-link { font-size: 10px; gap: 0; }
+  .sidebar-social { margin-top: 28px; padding-top: 0; }
+  .main-content { width: 100%; padding: 32px 0 64px; }
+  section { margin-bottom: 72px; }
+  .experience-item { grid-template-columns: 1fr; gap: 6px; }
+  .experience-date { padding-top: 0; }
+  .case-study-grid { grid-template-columns: 1fr 1fr; }
+  #float-cta { bottom: 20px; right: 16px; }
+}
+
+@media (max-width: 500px) {
+  .layout { padding: 0 20px; }
+  .sidebar-name { font-size: 32px; }
+  .tech-grid { grid-template-columns: 1fr; }
+  .case-study-grid { grid-template-columns: 1fr; }
+  .case-steps { flex-direction: column; }
+  .case-step { border-right: none; border-bottom: 1px solid var(--border); }
+  .case-step:last-child { border-bottom: none; }
+  .case-step::after { display: none; }
+  .project-card, .experience-item { padding: 16px 14px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .reveal { opacity:1; transform: none; }
+  #hero-canvas { display: none; }
+}
+</style>
 </head>
-
 <body>
-    <a class="skip-link" href="#about">Skip to main content</a>
 
-    <div class="layout">
-        <!-- LEFT COLUMN - Sticky Sidebar -->
-        <aside class="sidebar">
-            <div class="sidebar-header">
-                <h1 class="sidebar-name">Dipesh Kunwar</h1>
-                <h2 class="sidebar-title">Frontend Developer</h2>
-                <p class="sidebar-tagline">I build accessible, performant interfaces for the web.</p>
+<!-- Canvas particle background -->
+<canvas id="hero-canvas" aria-hidden="true"></canvas>
 
-                <nav class="sidebar-nav" aria-label="Primary navigation">
-                    <ul class="nav-list">
-                        <li class="nav-item">
-                            <a href="#about" class="nav-link active">About</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="#experience" class="nav-link">Experience</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="#projects" class="nav-link">Projects</a>
-                        </li>
-                    </ul>
-                </nav>
-            </div>
+<!-- Skip link -->
+<a class="skip-link" href="#about">Skip to main content</a>
 
-            <div class="sidebar-social" aria-label="Social links">
-                <a href="https://github.com/Dipesh038" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="GitHub">
-                    <svg viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-                    </svg>
-                </a>
-                <a href="https://www.linkedin.com/in/dipesh-kunwar-a09894322/" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="LinkedIn">
-                    <svg viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
-                    </svg>
-                </a>
-                <a href="mailto:dipeshkunwar8@gmail.com" class="social-link" aria-label="Email">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
-                        <polyline points="22,6 12,13 2,6"></polyline>
-                    </svg>
-                </a>
-            </div>
-        </aside>
+<!-- Floating Interactive Mascot -->
+<div id="mascot" aria-hidden="true">
+  <div class="mascot-body">
+    <div class="mascot-eyes">
+      <div class="m-eye"></div>
+      <div class="m-eye"></div>
+    </div>
+    <div class="mascot-mouth"></div>
+    
+    <!-- Hands -->
+    <div class="mascot-hand left"></div>
+    <div class="mascot-hand right"></div>
+    
+    <!-- Legs -->
+    <div class="mascot-leg left"></div>
+    <div class="mascot-leg right"></div>
+  </div>
+</div>
 
-        <!-- RIGHT COLUMN - Scrollable Content -->
-        <main class="main-content">
-            <!-- About Section -->
-            <section id="about" class="fade-section">
-                <h2 class="section-heading"><span class="num">01.</span> About</h2>
-                <div class="about-content">
-                    <p>
-                        Hello! I'm Dipesh, a frontend-focused developer based in <strong>Gandhinagar, Gujarat</strong>. 
-                        I'm currently pursuing Computer Science at <strong>Pandit Deendayal Energy University</strong>. 
-                        I love building accessible, user-friendly digital products with clean design and seamless interactivity.
-                    </p>
-                    <p>
-                        My interest in web development started when I realized how powerful a well-crafted interface can be 
-                        in making technology accessible to everyone. Since then, I've been focused on creating 
-                        performant, responsive applications that prioritize user experience.
-                    </p>
-                    <p>
-                        I recently developed a <a href="https://moviegetstore.vercel.app/" target="_blank" rel="noopener noreferrer">movie application prototype</a> 
-                        featuring an intuitive interface for discovering and streaming movies with ease.
-                    </p>
-                    <p>Here are a few technologies I've been working with recently:</p>
-                    <ul class="tech-grid">
-                        <li class="tech-item">JavaScript (ES6+)</li>
-                        <li class="tech-item">TypeScript</li>
-                        <li class="tech-item">Java</li>
-                        <li class="tech-item">Three.js</li>
-                        <li class="tech-item">HTML/CSS</li>
-                        <li class="tech-item">MySQL</li>
-                    </ul>
-                </div>
-            </section>
+<!-- Floating CTA -->
+<div id="float-cta" aria-label="Contact">
+  <a href="mailto:dipeshkunwar8@gmail.com" class="float-cta-btn">
+    Let's work together <span class="arrow">→</span>
+  </a>
+</div>
 
-            <!-- Experience Section -->
-            <section id="experience" class="fade-section">
-                <h2 class="section-heading"><span class="num">02.</span> Experience</h2>
-                <div class="experience-list">
-                    <article class="experience-item">
-                        <div class="experience-date">2024 — Present</div>
-                        <div class="experience-content">
-                            <h3>
-                                CS Student · <a href="https://www.pdpu.ac.in/" target="_blank" rel="noopener noreferrer"><span class="company">PDEU</span></a>
-                            </h3>
-                            <p>
-                                Pursuing Computer Science with a focus on frontend engineering. Building projects with 
-                                TypeScript, Three.js, and accessibility-first design patterns. Developing strong foundations 
-                                in data structures, algorithms, and software engineering principles.
-                            </p>
-                            <ul class="experience-tags">
-                                <li class="experience-tag">TypeScript</li>
-                                <li class="experience-tag">JavaScript</li>
-                                <li class="experience-tag">Three.js</li>
-                                <li class="experience-tag">Java</li>
-                            </ul>
-                        </div>
-                    </article>
+<!-- Background Music Element -->
+<audio id="bg-music" loop preload="none">
+  <source src="chill-track.mp3" type="audio/mpeg">
+</audio>
 
-                    <article class="experience-item">
-                        <div class="experience-date">2024</div>
-                        <div class="experience-content">
-                            <h3>
-                                Personal Projects · <span class="company">Self-Directed</span>
-                            </h3>
-                            <p>
-                                Developed multiple web applications including a movie discovery platform, 
-                                interactive portfolio with 3D animations, and cinema booking system. 
-                                Focused on responsive design, performance optimization, and clean code architecture.
-                            </p>
-                            <ul class="experience-tags">
-                                <li class="experience-tag">HTML/CSS</li>
-                                <li class="experience-tag">JavaScript</li>
-                                <li class="experience-tag">Responsive Design</li>
-                                <li class="experience-tag">Git</li>
-                            </ul>
-                        </div>
-                    </article>
-                </div>
+<!-- Music Toggle Button -->
+<button id="music-toggle" class="music-toggle-btn" aria-label="Play background music">
+  <span class="music-text">Music: Off</span>
+  <!-- Equalizer animation bars -->
+  <div class="equalizer">
+    <span class="bar"></span>
+    <span class="bar"></span>
+    <span class="bar"></span>
+  </div>
+</button>
 
-                <a href="resume.pdf" target="_blank" rel="noopener noreferrer" class="resume-link">
-                    View Full Resume
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <line x1="5" y1="12" x2="19" y2="12"></line>
-                        <polyline points="12 5 19 12 12 19"></polyline>
-                    </svg>
-                </a>
-            </section>
+<div class="layout">
 
-            <!-- Projects Section -->
-            <section id="projects" class="fade-section">
-                <h2 class="section-heading"><span class="num">03.</span> Projects</h2>
-                <div class="projects-list">
-                    <!-- Project 1: Movie Application -->
-                    <article class="project-card">
-                        <p class="project-label">Featured Project</p>
-                        <div class="project-header">
-                            <h3 class="project-title">
-                                <a href="https://moviegetstore.vercel.app/" target="_blank" rel="noopener noreferrer">Movie Application Prototype</a>
-                            </h3>
-                            <div class="project-links">
-                                <a href="https://moviegetstore.vercel.app/" target="_blank" rel="noopener noreferrer" class="project-link" aria-label="External Link">
-                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                        <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-                                        <polyline points="15 3 21 3 21 9"></polyline>
-                                        <line x1="10" y1="14" x2="21" y2="3"></line>
-                                    </svg>
-                                </a>
-                            </div>
-                        </div>
-                        <p class="project-description">
-                            A full-featured movie discovery app with intuitive browsing and streaming UI. 
-                            Built with TypeScript for type safety, featuring responsive design and smooth user interactions.
-                        </p>
-                        <ul class="project-tags">
-                            <li class="project-tag">TypeScript</li>
-                            <li class="project-tag">HTML</li>
-                            <li class="project-tag">CSS</li>
-                        </ul>
-                    </article>
+  <!-- ==========================================
+       SIDEBAR
+       ========================================== -->
+  <aside class="sidebar">
+    <div class="sidebar-header">
 
-                    <!-- Project 2: Portfolio Page -->
-                    <article class="project-card">
-                        <p class="project-label">Featured Project</p>
-                        <div class="project-header">
-                            <h3 class="project-title">
-                                <a href="https://portfoliodipeshkunwar.vercel.app/" target="_blank" rel="noopener noreferrer">Portfolio Page</a>
-                            </h3>
-                            <div class="project-links">
-                                <a href="https://portfoliodipeshkunwar.vercel.app/" target="_blank" rel="noopener noreferrer" class="project-link" aria-label="External Link">
-                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                        <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-                                        <polyline points="15 3 21 3 21 9"></polyline>
-                                        <line x1="10" y1="14" x2="21" y2="3"></line>
-                                    </svg>
-                                </a>
-                            </div>
-                        </div>
-                        <p class="project-description">
-                            Personal portfolio with interactive 3D background using Three.js particles, 
-                            smooth animations, and glassmorphism design.
-                        </p>
-                        <ul class="project-tags">
-                            <li class="project-tag">Three.js</li>
-                            <li class="project-tag">JavaScript</li>
-                            <li class="project-tag">HTML/CSS</li>
-                        </ul>
-                    </article>
+      <h1 class="sidebar-name">Dipesh<br>Kunwar</h1>
 
-                    <!-- Project 3: Cinema Booking -->
-                    <article class="project-card">
-                        <p class="project-label">Featured Project</p>
-                        <div class="project-header">
-                            <h3 class="project-title">
-                                <a href="https://github.com/Dipesh038/Cinema-Booking" target="_blank" rel="noopener noreferrer">Cinema Booking</a>
-                            </h3>
-                            <div class="project-links">
-                                <a href="https://github.com/Dipesh038/Cinema-Booking" target="_blank" rel="noopener noreferrer" class="project-link" aria-label="GitHub">
-                                    <svg viewBox="0 0 24 24" fill="currentColor">
-                                        <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-                                    </svg>
-                                </a>
-                            </div>
-                        </div>
-                        <p class="project-description">
-                            Cinema seat booking system with real-time seat availability, 
-                            interactive seat selection, and smooth booking flow.
-                        </p>
-                        <ul class="project-tags">
-                            <li class="project-tag">JavaScript</li>
-                            <li class="project-tag">HTML/CSS</li>
-                            <li class="project-tag">LocalStorage</li>
-                        </ul>
-                    </article>
-                </div>
-            </section>
+      <h2 class="sidebar-title">
+        <span id="typed-title">Frontend Developer</span><span class="cursor" aria-hidden="true"></span>
+      </h2>
 
-            <!-- Footer -->
-            <footer>
-                <p class="footer-text">Designed & Built by Dipesh Kunwar</p>
-            </footer>
-        </main>
+      <p class="sidebar-tagline">
+        I build accessible, performant interfaces that make technology feel effortless.
+      </p>
+
+      <!-- Navigation -->
+      <nav class="sidebar-nav" aria-label="Primary navigation">
+        <ul class="nav-list">
+          <li class="nav-item">
+            <a href="#about" class="nav-link active" aria-current="page">
+              <span class="nav-line" aria-hidden="true"></span>About
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#experience" class="nav-link">
+              <span class="nav-line" aria-hidden="true"></span>Experience
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#projects" class="nav-link">
+              <span class="nav-line" aria-hidden="true"></span>Projects
+            </a>
+          </li>
+        </ul>
+      </nav>
+
     </div>
 
-    <script>
-        // Scrollspy: highlight active nav link based on scroll position
-        const sections = document.querySelectorAll('section[id]');
-        const navLinks = document.querySelectorAll('.nav-link');
+    <!-- Social links -->
+    <div class="sidebar-social" aria-label="Social links">
+      <a href="https://github.com/Dipesh038" target="_blank" rel="noopener noreferrer"
+         class="social-link" aria-label="GitHub profile">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+        </svg>
+      </a>
+      <a href="https://www.linkedin.com/in/dipesh-kunwar-a09894322/" target="_blank" rel="noopener noreferrer"
+         class="social-link" aria-label="LinkedIn profile">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+        </svg>
+      </a>
+      <a href="mailto:dipeshkunwar8@gmail.com" class="social-link" aria-label="Email Dipesh">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+             stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+          <polyline points="22,6 12,13 2,6"/>
+        </svg>
+      </a>
+    </div>
+  </aside>
 
-        function updateActiveNav() {
-            const scrollPosition = window.scrollY + 150;
+  <!-- ==========================================
+       MAIN CONTENT
+       ========================================== -->
+  <main class="main-content">
 
-            sections.forEach(section => {
-                const sectionTop = section.offsetTop;
-                const sectionHeight = section.offsetHeight;
-                const sectionId = section.getAttribute('id');
+    <!-- ====== ABOUT ====== -->
+    <section id="about" aria-label="About me">
+      <div class="section-heading">
+        <span class="num" aria-hidden="true">01.</span>
+        <span class="title">About</span>
+      </div>
 
-                if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
-                    navLinks.forEach(link => {
-                        link.classList.remove('active');
-                        if (link.getAttribute('href') === `#${sectionId}`) {
-                            link.classList.add('active');
-                        }
-                    });
-                }
-            });
+      <div class="about-content">
+        <div class="reveal">
+          <p>
+            Hey — I'm Dipesh, a frontend developer based in <strong>Gandhinagar, Gujarat</strong>,
+            currently studying Computer Science at <strong>Pandit Deendayal Energy University</strong>.
+            I chase the intersection of clean engineering and visual craft.
+          </p>
+        </div>
+
+        <div class="reveal delay-1">
+          <p>
+            I believe great interfaces should feel obvious — no tutorials required. I obsess over
+            interaction states, loading skeletons, and the micro-moments that make a product feel
+            alive rather than just functional.
+          </p>
+          <p>
+            My current exploration is bridging <strong>3D graphics</strong> and everyday UIs —
+            using Three.js not for flashy effects, but for spatial depth that genuinely helps users
+            orient within complex information.
+          </p>
+          <p>Technologies I'm working with:</p>
+          <ul class="tech-grid" aria-label="Technologies">
+            <li class="tech-item">JavaScript (ES6+)</li>
+            <li class="tech-item">TypeScript</li>
+            <li class="tech-item">Three.js</li>
+            <li class="tech-item">HTML / CSS</li>
+            <li class="tech-item">Java</li>
+            <li class="tech-item">MySQL</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====== EXPERIENCE ====== -->
+    <section id="experience" aria-label="Experience">
+      <div class="section-heading reveal">
+        <span class="num" aria-hidden="true">02.</span>
+        <span class="title">Experience</span>
+      </div>
+
+      <div class="experience-list">
+
+        <article class="experience-item reveal">
+          <div class="experience-date">2023 — Now</div>
+          <div class="experience-content">
+            <h3>
+              CS Student ·
+              <a href="https://www.pdpu.ac.in/" target="_blank" rel="noopener noreferrer">
+                <span class="company">PDEU</span>
+              </a>
+            </h3>
+            <p>
+              Pursuing Computer Science with a dedicated focus on frontend engineering.
+              Building TypeScript-first projects with accessibility-first design patterns.
+              Simultaneously developing depth in data structures, algorithms, and software
+              engineering principles that make UI decisions defensible at scale.
+            </p>
+            <ul class="tag-list" aria-label="Technologies used">
+              <li class="tag">TypeScript</li>
+              <li class="tag">JavaScript</li>
+              <li class="tag">Three.js</li>
+              <li class="tag">Java</li>
+              <li class="tag">DSA</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="experience-item reveal delay-1">
+          <div class="experience-date">2024</div>
+          <div class="experience-content">
+            <h3>Personal Projects · <span class="company">Self-Directed</span></h3>
+            <p>
+              Shipped three production-quality web applications: a movie discovery platform
+              (TypeScript, TMDB API), an interactive 3D portfolio (Three.js particle systems),
+              and a cinema seat booking system with real-time state management.
+              Focused on responsive layout engineering, performance profiling, and
+              building without frameworks to understand how tools work under the hood.
+            </p>
+            <ul class="tag-list" aria-label="Technologies used">
+              <li class="tag">HTML / CSS</li>
+              <li class="tag">JavaScript</li>
+              <li class="tag">Responsive Design</li>
+              <li class="tag">Performance</li>
+              <li class="tag">Git</li>
+            </ul>
+          </div>
+        </article>
+
+      </div>
+
+      <a href="resume.pdf" target="_blank" rel="noopener noreferrer" class="resume-link reveal delay-2">
+        View Full Résumé
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+             stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <line x1="5" y1="12" x2="19" y2="12"/>
+          <polyline points="12 5 19 12 12 19"/>
+        </svg>
+      </a>
+    </section>
+
+    <!-- ====== PROJECTS ====== -->
+    <section id="projects" aria-label="Projects">
+      <div class="section-heading reveal">
+        <span class="num" aria-hidden="true">03.</span>
+        <span class="title">Projects</span>
+      </div>
+
+      <div class="projects-list">
+
+        <!-- Recent GitHub Projects -->
+        <article class="project-card reveal">
+          <p class="project-label">Recent GitHub Project</p>
+          <div class="project-header">
+            <h3 class="project-title">
+              <a href="https://github.com/Dipesh038/Cinema" target="_blank" rel="noopener noreferrer">
+                Cinema
+              </a>
+            </h3>
+            <div class="project-links">
+              <a href="https://github.com/Dipesh038/Cinema" target="_blank" rel="noopener noreferrer"
+                 class="project-link" aria-label="View on GitHub">
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                  <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                </svg>
+              </a>
+            </div>
+          </div>
+          <p class="project-description">
+            A recent JavaScript project focused on cinema and movie experiences.
+            The repo reflects the latest direction of your public GitHub work and gives the portfolio
+            a more current snapshot of what you are building.
+          </p>
+          <ul class="tag-list">
+            <li class="tag">JavaScript</li>
+            <li class="tag">GitHub Repo</li>
+            <li class="tag">UI</li>
+            <li class="tag">Frontend</li>
+          </ul>
+        </article>
+
+        <!-- Smart Leads Dashboard -->
+        <article class="project-card reveal delay-1">
+          <p class="project-label">Recent GitHub Project</p>
+          <div class="project-header">
+            <h3 class="project-title">
+              <a href="https://github.com/Dipesh038/-Smart-Leads-Dashboard" target="_blank" rel="noopener noreferrer">
+                Smart Leads Dashboard
+              </a>
+            </h3>
+            <div class="project-links">
+              <a href="https://github.com/Dipesh038/-Smart-Leads-Dashboard" target="_blank" rel="noopener noreferrer"
+                 class="project-link" aria-label="View on GitHub">
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                  <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                </svg>
+              </a>
+            </div>
+          </div>
+          <p class="project-description">
+            A TypeScript dashboard concept for tracking and organizing leads.
+            It reads like an admin-style productivity tool and fits well as a current portfolio highlight.
+          </p>
+          <ul class="tag-list">
+            <li class="tag">TypeScript</li>
+            <li class="tag">Dashboard</li>
+            <li class="tag">Productivity</li>
+            <li class="tag">UI</li>
+          </ul>
+        </article>
+
+        <!-- AI -->
+        <article class="project-card reveal delay-2">
+          <p class="project-label">Recent GitHub Project</p>
+          <div class="project-header">
+            <h3 class="project-title">
+              <a href="https://github.com/Dipesh038/AI" target="_blank" rel="noopener noreferrer">
+                AI
+              </a>
+            </h3>
+            <div class="project-links">
+              <a href="https://github.com/Dipesh038/AI" target="_blank" rel="noopener noreferrer"
+                 class="project-link" aria-label="View on GitHub">
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                  <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                </svg>
+              </a>
+            </div>
+          </div>
+          <p class="project-description">
+            A JavaScript project from your GitHub profile that sits in the AI experimentation space.
+            I kept the description concise so the portfolio stays credible without overpromising details
+            that are not visible in the repo name alone.
+          </p>
+          <ul class="tag-list">
+            <li class="tag">JavaScript</li>
+            <li class="tag">Experiment</li>
+            <li class="tag">GitHub Repo</li>
+            <li class="tag">Prototype</li>
+          </ul>
+        </article>
+
+        <!-- StreamingWebseries -->
+        <article class="project-card reveal delay-3">
+          <p class="project-label">Recent GitHub Project</p>
+          <div class="project-header">
+            <h3 class="project-title">
+              <a href="https://github.com/Dipesh038/StreamingWebseries" target="_blank" rel="noopener noreferrer">
+                StreamingWebseries
+              </a>
+            </h3>
+            <div class="project-links">
+              <a href="https://github.com/Dipesh038/StreamingWebseries" target="_blank" rel="noopener noreferrer"
+                 class="project-link" aria-label="View on GitHub">
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                  <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                </svg>
+              </a>
+            </div>
+          </div>
+          <p class="project-description">
+            A TypeScript repository centered on streaming and web series browsing.
+            It rounds out the projects section with another current GitHub repo from your profile.
+          </p>
+          <ul class="tag-list">
+            <li class="tag">TypeScript</li>
+            <li class="tag">Streaming</li>
+            <li class="tag">Web App</li>
+            <li class="tag">Frontend</li>
+          </ul>
+        </article>
+
+      </div>
+    </section>
+
+    <footer>
+      <p class="footer-text">
+        Designed &amp; built by <a href="https://github.com/Dipesh038" target="_blank" rel="noopener noreferrer">Dipesh Kunwar</a>
+        · Built with HTML, CSS &amp; vanilla JS
+      </p>
+    </footer>
+
+  </main>
+</div>
+
+<script>
+/* =============================================
+   PARTICLE CANVAS
+   ============================================= */
+(function () {
+  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (prefersReduced) return;
+
+  const canvas = document.getElementById('hero-canvas');
+  const ctx = canvas.getContext('2d');
+
+  let W, H, particles = [], mouse = { x: -9999, y: -9999 };
+  const COUNT = 120;
+  const MAX_DIST = 130;
+  const MOUSE_DIST = 180;
+
+  function resize() {
+    W = canvas.width  = window.innerWidth;
+    H = canvas.height = window.innerHeight;
+  }
+
+  function rand(min, max) { return min + Math.random() * (max - min); }
+
+  function createParticle() {
+    return {
+      x: rand(0, W), y: rand(0, H),
+      vx: rand(-0.18, 0.18), vy: rand(-0.18, 0.18),
+      r: rand(1, 2.2),
+      opacity: rand(0.15, 0.55),
+      color: Math.random() > 0.75 ? '74,242,200' : '167,139,250'
+    };
+  }
+
+  function init() {
+    resize();
+    particles = Array.from({ length: COUNT }, createParticle);
+    canvas.classList.add('ready');
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+
+    // Connect nearby particles
+    for (let i = 0; i < particles.length; i++) {
+      for (let j = i + 1; j < particles.length; j++) {
+        const p = particles[i], q = particles[j];
+        const dx = p.x - q.x, dy = p.y - q.y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist < MAX_DIST) {
+          const alpha = (1 - dist / MAX_DIST) * 0.18;
+          ctx.beginPath();
+          ctx.moveTo(p.x, p.y);
+          ctx.lineTo(q.x, q.y);
+          ctx.strokeStyle = `rgba(74,242,200,${alpha})`;
+          ctx.lineWidth = 0.6;
+          ctx.stroke();
         }
+      }
+    }
 
-        // Throttle scroll events
-        let scrollTimeout;
-        window.addEventListener('scroll', () => {
-            if (scrollTimeout) {
-                window.cancelAnimationFrame(scrollTimeout);
-            }
-            scrollTimeout = window.requestAnimationFrame(updateActiveNav);
+    // Draw and move particles
+    particles.forEach(p => {
+      // Mouse repulsion
+      const mdx = p.x - mouse.x, mdy = p.y - mouse.y;
+      const md = Math.sqrt(mdx * mdx + mdy * mdy);
+      if (md < MOUSE_DIST && md > 0) {
+        const force = (MOUSE_DIST - md) / MOUSE_DIST * 0.6;
+        p.vx += (mdx / md) * force * 0.08;
+        p.vy += (mdy / md) * force * 0.08;
+      }
+
+      // Speed cap + damping
+      const spd = Math.sqrt(p.vx * p.vx + p.vy * p.vy);
+      if (spd > 1.5) { p.vx *= 1.5 / spd; p.vy *= 1.5 / spd; }
+      p.vx *= 0.99; p.vy *= 0.99;
+
+      // Move
+      p.x += p.vx; p.y += p.vy;
+
+      // Wrap edges
+      if (p.x < 0) p.x = W; if (p.x > W) p.x = 0;
+      if (p.y < 0) p.y = H; if (p.y > H) p.y = 0;
+
+      // Draw
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(${p.color},${p.opacity})`;
+      ctx.fill();
+    });
+
+    requestAnimationFrame(draw);
+  }
+
+  window.addEventListener('mousemove', e => { mouse.x = e.clientX; mouse.y = e.clientY; });
+  window.addEventListener('touchmove', e => {
+    mouse.x = e.touches[0].clientX;
+    mouse.y = e.touches[0].clientY;
+  }, { passive: true });
+  window.addEventListener('resize', resize);
+
+  init();
+  requestAnimationFrame(draw);
+})();
+
+/* =============================================
+   TYPEWRITER EFFECT
+   ============================================= */
+(function () {
+  const titles = ['Frontend Developer', 'UI Craftsman', 'Three.js Explorer', 'Accessibility Advocate'];
+  const el = document.getElementById('typed-title');
+  if (!el) return;
+  let ti = 0, ci = 0, deleting = false;
+  const SPEED_TYPE = 80, SPEED_DEL = 40, PAUSE = 2200;
+
+  function type() {
+    const word = titles[ti];
+    if (!deleting) {
+      el.textContent = word.slice(0, ++ci);
+      if (ci === word.length) { deleting = true; setTimeout(type, PAUSE); return; }
+    } else {
+      el.textContent = word.slice(0, --ci);
+      if (ci === 0) { deleting = false; ti = (ti + 1) % titles.length; }
+    }
+    setTimeout(type, deleting ? SPEED_DEL : SPEED_TYPE);
+  }
+  // Start after page load animation
+  setTimeout(type, 1200);
+})();
+
+/* =============================================
+   SCROLLSPY
+   ============================================= */
+(function () {
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.nav-link');
+
+  function updateNav() {
+    const pos = window.scrollY + 160;
+    sections.forEach(sec => {
+      if (pos >= sec.offsetTop && pos < sec.offsetTop + sec.offsetHeight) {
+        const id = sec.id;
+        navLinks.forEach(a => {
+          const active = a.getAttribute('href') === '#' + id;
+          a.classList.toggle('active', active);
+          if (active) a.setAttribute('aria-current', 'page');
+          else a.removeAttribute('aria-current');
         });
+      }
+    });
+  }
 
-        // IntersectionObserver for fade-in animations
-        const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let raf;
+  window.addEventListener('scroll', () => {
+    cancelAnimationFrame(raf);
+    raf = requestAnimationFrame(updateNav);
+  }, { passive: true });
+  updateNav();
+})();
 
-        if (!prefersReduced) {
-            const fadeObserver = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('visible');
-                    }
-                });
-            }, {
-                threshold: 0.1,
-                rootMargin: '0px 0px -50px 0px'
-            });
+/* =============================================
+   INTERSECTION OBSERVER — REVEALS
+   ============================================= */
+(function () {
+  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const els = document.querySelectorAll('.reveal');
 
-            document.querySelectorAll('.fade-section').forEach(section => {
-                fadeObserver.observe(section);
-            });
-        } else {
-            // If reduced motion is preferred, show all sections immediately
-            document.querySelectorAll('.fade-section').forEach(section => {
-                section.classList.add('visible');
-            });
-        }
+  if (prefersReduced) {
+    els.forEach(el => el.classList.add('in'));
+    return;
+  }
 
-        // Smooth scroll for nav links
-        navLinks.forEach(link => {
-            link.addEventListener('click', (e) => {
-                e.preventDefault();
-                const targetId = link.getAttribute('href');
-                const targetSection = document.querySelector(targetId);
-                if (targetSection) {
-                    targetSection.scrollIntoView({
-                        behavior: prefersReduced ? 'auto' : 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
-        });
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); obs.unobserve(e.target); } });
+  }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
 
-        // Initialize
-        updateActiveNav();
-    </script>
+  els.forEach(el => obs.observe(el));
+})();
+
+/* =============================================
+   FLOATING CTA — show after scroll
+   ============================================= */
+(function () {
+  const cta = document.getElementById('float-cta');
+  let shown = false;
+  window.addEventListener('scroll', () => {
+    const shouldShow = window.scrollY > 400;
+    if (shouldShow !== shown) {
+      shown = shouldShow;
+      cta.classList.toggle('show', shown);
+    }
+  }, { passive: true });
+})();
+
+/* =============================================
+   SMOOTH SCROLL (nav links)
+   ============================================= */
+(function () {
+  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const target = document.querySelector(a.getAttribute('href'));
+      if (!target) return;
+      e.preventDefault();
+      target.scrollIntoView({ behavior: prefersReduced ? 'auto' : 'smooth', block: 'start' });
+    });
+  });
+})();
+
+/* =============================================
+   MASCOT INTERACTIONS & AUDIO
+   ============================================= */
+(function () {
+  const mascot = document.getElementById('mascot');
+  if (!mascot) return;
+
+  // 1. Setup Web Audio API Context
+  const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+
+  // Browsers suspend audio until user interaction. This unlocks it on the first click.
+  const unlockAudio = () => {
+    if (audioCtx.state === 'suspended') {
+      audioCtx.resume();
+    }
+    document.removeEventListener('click', unlockAudio);
+  };
+  document.addEventListener('click', unlockAudio);
+
+  // 2. Synthesize sounds
+  function playHoverSound() {
+    if (audioCtx.state === 'suspended') return;
+    const osc = audioCtx.createOscillator();
+    const gainNode = audioCtx.createGain();
+
+    // A soft, low 'bloop' sound
+    osc.type = 'sine';
+    osc.frequency.setValueAtTime(300, audioCtx.currentTime);
+    osc.frequency.exponentialRampToValueAtTime(500, audioCtx.currentTime + 0.1);
+
+    gainNode.gain.setValueAtTime(0, audioCtx.currentTime);
+    gainNode.gain.linearRampToValueAtTime(0.05, audioCtx.currentTime + 0.02);
+    gainNode.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.1);
+
+    osc.connect(gainNode);
+    gainNode.connect(audioCtx.destination);
+    osc.start();
+    osc.stop(audioCtx.currentTime + 0.1);
+  }
+
+  function playClickSound() {
+    if (audioCtx.state === 'suspended') return;
+    const osc = audioCtx.createOscillator();
+    const gainNode = audioCtx.createGain();
+
+    // A happy, high 'chirp' sound
+    osc.type = 'triangle';
+    osc.frequency.setValueAtTime(600, audioCtx.currentTime);
+    osc.frequency.exponentialRampToValueAtTime(1200, audioCtx.currentTime + 0.15);
+
+    gainNode.gain.setValueAtTime(0, audioCtx.currentTime);
+    gainNode.gain.linearRampToValueAtTime(0.08, audioCtx.currentTime + 0.02);
+    gainNode.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.15);
+
+    osc.connect(gainNode);
+    gainNode.connect(audioCtx.destination);
+    osc.start();
+    osc.stop(audioCtx.currentTime + 0.15);
+  }
+
+  // 3. Attach to interactable elements
+  const interactables = document.querySelectorAll('a, button, .project-card, .experience-item, .float-cta-btn');
+
+  interactables.forEach(el => {
+    el.addEventListener('mouseenter', () => {
+      mascot.classList.add('is-hovering');
+      playHoverSound();
+    });
+    
+    el.addEventListener('mouseleave', () => {
+      mascot.classList.remove('is-hovering');
+    });
+    
+    el.addEventListener('mousedown', () => {
+      mascot.classList.add('is-clicking');
+      playClickSound();
+    });
+  });
+
+  // Global mouseup to reset the click state
+  window.addEventListener('mouseup', () => {
+    mascot.classList.remove('is-clicking');
+  });
+})();
+
+/* =============================================
+   PAGE LOAD CLASS
+   ============================================= */
+window.addEventListener('load', () => {
+  document.body.classList.add('page-loaded');
+});
+/* =============================================
+   BACKGROUND MUSIC CONTROLLER
+   ============================================= */
+(function () {
+  const audio = document.getElementById('bg-music');
+  const toggleBtn = document.getElementById('music-toggle');
+  const btnText = toggleBtn.querySelector('.music-text');
+  if (!audio || !toggleBtn) return;
+
+  // Set default volume low so it's "chill"
+  const MAX_VOLUME = 0.3; 
+  audio.volume = 0; 
+  let fadeInterval;
+
+  function fadeAudio(targetVolume, duration = 1000) {
+    clearInterval(fadeInterval);
+    const steps = 20;
+    const stepTime = duration / steps;
+    const volumeStep = (targetVolume - audio.volume) / steps;
+
+    fadeInterval = setInterval(() => {
+      let newVolume = audio.volume + volumeStep;
+      // Clamp volume between 0 and MAX_VOLUME
+      if (newVolume > MAX_VOLUME) newVolume = MAX_VOLUME;
+      if (newVolume < 0) newVolume = 0;
+      
+      audio.volume = newVolume;
+
+      if ((volumeStep > 0 && audio.volume >= targetVolume) || 
+          (volumeStep < 0 && audio.volume <= targetVolume)) {
+        clearInterval(fadeInterval);
+        if (targetVolume === 0) audio.pause();
+      }
+    }, stepTime);
+  }
+
+  function playMusic() {
+    audio.play().then(() => {
+      toggleBtn.classList.add('is-playing');
+      btnText.textContent = 'Music: On';
+      fadeAudio(MAX_VOLUME);
+      localStorage.setItem('portfolio_music', 'playing');
+    }).catch(err => {
+      console.log("Audio play failed (browser block):", err);
+    });
+  }
+
+  function pauseMusic() {
+    toggleBtn.classList.remove('is-playing');
+    btnText.textContent = 'Music: Off';
+    fadeAudio(0);
+    localStorage.setItem('portfolio_music', 'muted');
+  }
+
+toggleBtn.addEventListener('click', (e) => {
+    e.stopPropagation(); // Prevents this click from triggering the global click listener below
+    if (audio.paused || audio.volume === 0) {
+      playMusic();
+    } else {
+      pauseMusic();
+    }
+  });
+
+  // Check memory on load. If it's their first time visiting, default to 'playing'
+  let savedState = localStorage.getItem('portfolio_music');
+  
+  if (savedState === null) {
+    savedState = 'playing'; // Default state for new visitors
+  }
+
+  if (savedState === 'playing') {
+    // Browsers block autoplay, so we wait for their FIRST click/tap anywhere on the page
+    const startAudioOnInteraction = () => {
+      if (audio.paused || audio.volume === 0) {
+        playMusic();
+      }
+      // Remove listeners once the music starts so we don't keep firing this
+      document.removeEventListener('click', startAudioOnInteraction);
+      document.removeEventListener('keydown', startAudioOnInteraction);
+      document.removeEventListener('touchstart', startAudioOnInteraction);
+    };
+
+    // We try to play it immediately just in case the browser allows it
+    audio.play().then(() => {
+      toggleBtn.classList.add('is-playing');
+      btnText.textContent = 'Music: On';
+      fadeAudio(MAX_VOLUME);
+      localStorage.setItem('portfolio_music', 'playing');
+    }).catch(err => {
+      // If the browser blocks it (which is normal), wait for them to click anywhere
+      document.addEventListener('click', startAudioOnInteraction);
+      document.addEventListener('keydown', startAudioOnInteraction);
+      document.addEventListener('touchstart', startAudioOnInteraction, { passive: true });
+    });
+  }
+})();
+</script>
 </body>
-
+</html>
