@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Dipesh Kunwar — Frontend Developer</title>
 <meta name="description" content="Portfolio of Dipesh Kunwar — frontend developer building accessible, performant, and visually compelling web applications.">
-<meta name="theme-color" content="#0a0f1e">
+<meta name="theme-color" content="#121212">
 <meta property="og:title" content="Dipesh Kunwar — Frontend Developer">
 <meta property="og:description" content="Frontend developer building accessible, performant interfaces for the web.">
 <meta property="og:type" content="website">
@@ -17,22 +17,21 @@
    DESIGN TOKENS
    ============================================= */
 :root {
-  --navy:           #0a0f1e;
-  --navy-2:         #0d1428;
-  --navy-3:         #111d35;
-  --navy-4:         #162040;
-  --slate:          #7a8499;
-  --slate-light:    #9ba3b8;
-  --slate-lighter:  #c8d0e7;
-  --white:          #e8f0ff;
-  --green:          #4af2c8;
-  --green-dim:      #2dd4a8;
-  --green-tint:     rgba(74,242,200,0.08);
-  --green-tint-2:   rgba(74,242,200,0.15);
-  --purple:         #a78bfa;
-  --purple-tint:    rgba(167,139,250,0.08);
-  --border:         rgba(200,208,231,0.07);
-  --border-hover:   rgba(74,242,200,0.2);
+  --bg:             #121212;
+  --bg-2:           #171717;
+  --bg-3:           #1e1e1e;
+  --bg-4:           #262626;
+  --muted:          #96918a;
+  --muted-light:    #b3aea5;
+  --muted-lighter:  #d9d3c8;
+  --white:          #f3ede2;
+  --accent:         #e8b04b;
+  --accent-dim:     #d19a35;
+  --accent-tint:    rgba(232,176,75,0.08);
+  --accent-tint-2:  rgba(232,176,75,0.15);
+  --rust:           #c97b5f;
+  --border:         rgba(217,211,200,0.07);
+  --border-hover:   rgba(232,176,75,0.2);
   --font-sans:      'Inter', system-ui, sans-serif;
   --font-mono:      'JetBrains Mono', monospace;
   --ease-out:       cubic-bezier(0.16,1,0.3,1);
@@ -48,17 +47,17 @@ html { scroll-behavior:smooth; font-size:16px; }
 
 body {
   font-family: var(--font-sans);
-  background: var(--navy);
-  color: var(--slate);
+  background: var(--bg);
+  color: var(--muted);
   line-height: 1.6;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
 }
 
-::selection { background: var(--green-tint-2); color: var(--green); }
+::selection { background: var(--accent-tint-2); color: var(--accent); }
 
 a:focus-visible, button:focus-visible {
-  outline: 2px dashed var(--green);
+  outline: 2px dashed var(--accent);
   outline-offset: 3px;
   border-radius: 3px;
 }
@@ -81,7 +80,7 @@ body::after {
   content: '';
   position: fixed;
   inset: 0;
-  background: radial-gradient(ellipse at 30% 40%, transparent 40%, rgba(10,15,30,0.85) 100%);
+  background: radial-gradient(ellipse at 30% 40%, transparent 40%, rgba(18,18,18,0.85) 100%);
   pointer-events: none;
   z-index: 1;
 }
@@ -100,9 +99,9 @@ body::after {
   left: 20px; top: 20px;
   width: auto; height: auto;
   padding: 10px 16px;
-  background: var(--navy-3);
+  background: var(--bg-3);
   color: var(--white);
-  border: 1px solid var(--green);
+  border: 1px solid var(--accent);
   border-radius: 6px;
   z-index: 10000;
   font-size: 14px;
@@ -151,7 +150,7 @@ body::after {
 .sidebar-title {
   font-size: clamp(16px,2vw,20px);
   font-weight: 400;
-  color: var(--slate-lighter);
+  color: var(--muted-lighter);
   margin-bottom: 18px;
   font-family: var(--font-mono);
   letter-spacing: 0.02em;
@@ -161,7 +160,7 @@ body::after {
 .sidebar-title .cursor {
   display: inline-block;
   width: 2px; height: 1em;
-  background: var(--green);
+  background: var(--accent);
   margin-left: 3px;
   vertical-align: middle;
   animation: blink 1s step-end infinite;
@@ -170,7 +169,7 @@ body::after {
 
 .sidebar-tagline {
   font-size: 15px;
-  color: var(--slate);
+  color: var(--muted);
   max-width: 320px;
   line-height: 1.6;
 }
@@ -184,7 +183,7 @@ body::after {
   display: inline-flex;
   align-items: center;
   gap: 14px;
-  color: var(--slate);
+  color: var(--muted);
   text-decoration: none;
   font-size: 11px;
   font-weight: 600;
@@ -197,16 +196,16 @@ body::after {
 .nav-line {
   display: inline-block;
   width: 32px; height: 1px;
-  background: var(--slate);
+  background: var(--muted);
   transition: width 0.35s var(--ease-out), background 0.25s ease;
 }
 .nav-link:hover .nav-line,
 .nav-link.active .nav-line {
   width: 72px;
 }
-.nav-link:hover { color: var(--slate-lighter); }
+.nav-link:hover { color: var(--muted-lighter); }
 .nav-link.active { color: var(--white); }
-.nav-link.active .nav-line { background: var(--green); }
+.nav-link.active .nav-line { background: var(--accent); }
 
 /* ---- SOCIAL ---- */
 .sidebar-social {
@@ -218,12 +217,12 @@ body::after {
 }
 
 .social-link {
-  color: var(--slate);
+  color: var(--muted);
   text-decoration: none;
   transition: color 0.25s ease, transform 0.25s var(--ease-spring);
   display: flex;
 }
-.social-link:hover { color: var(--green); transform: translateY(-4px); }
+.social-link:hover { color: var(--accent); transform: translateY(-4px); }
 .social-link svg { width: 21px; height: 21px; }
 
 /* =============================================
@@ -262,7 +261,7 @@ section {
 .section-heading .num {
   font-family: var(--font-mono);
   font-size: 13px;
-  color: var(--green);
+  color: var(--accent);
   font-weight: 400;
 }
 .section-heading .title {
@@ -285,17 +284,17 @@ section {
 .about-content p {
   font-size: 15px;
   line-height: 1.75;
-  color: var(--slate);
+  color: var(--muted);
   margin-bottom: 18px;
 }
 .about-content a {
-  color: var(--green);
+  color: var(--accent);
   text-decoration: none;
-  border-bottom: 1px solid rgba(74,242,200,0.3);
+  border-bottom: 1px solid rgba(232,176,75,0.3);
   transition: border-color 0.2s;
 }
-.about-content a:hover { border-color: var(--green); }
-.about-content strong { color: var(--slate-lighter); font-weight: 500; }
+.about-content a:hover { border-color: var(--accent); }
+.about-content strong { color: var(--muted-lighter); font-weight: 500; }
 
 /* Tech grid */
 .tech-grid {
@@ -311,11 +310,11 @@ section {
   gap: 9px;
   font-family: var(--font-mono);
   font-size: 12.5px;
-  color: var(--slate-light);
+  color: var(--muted-light);
 }
 .tech-item::before {
   content: '▹';
-  color: var(--green);
+  color: var(--accent);
   font-size: 11px;
   flex-shrink: 0;
 }
@@ -336,7 +335,7 @@ section {
   cursor: default;
 }
 .experience-item:hover {
-  background: var(--navy-3);
+  background: var(--bg-3);
   border-color: var(--border-hover);
   transform: translateX(4px);
 }
@@ -344,7 +343,7 @@ section {
 .experience-date {
   font-family: var(--font-mono);
   font-size: 11px;
-  color: var(--slate);
+  color: var(--muted);
   font-weight: 500;
   text-transform: uppercase;
   letter-spacing: 0.07em;
@@ -355,7 +354,7 @@ section {
 .experience-content h3 {
   font-size: 16px;
   font-weight: 500;
-  color: var(--slate-lighter);
+  color: var(--muted-lighter);
   margin-bottom: 10px;
   transition: color 0.25s;
 }
@@ -366,13 +365,13 @@ section {
   text-decoration: none;
   transition: color 0.25s;
 }
-.experience-content h3 a:hover { color: var(--green); }
-.company { color: var(--green); }
+.experience-content h3 a:hover { color: var(--accent); }
+.company { color: var(--accent); }
 
 .experience-content p {
   font-size: 13.5px;
   line-height: 1.65;
-  color: var(--slate);
+  color: var(--muted);
   margin-bottom: 14px;
 }
 
@@ -385,14 +384,14 @@ section {
 .tag {
   font-family: var(--font-mono);
   font-size: 10.5px;
-  color: var(--green);
-  background: var(--green-tint);
+  color: var(--accent);
+  background: var(--accent-tint);
   border-radius: 999px;
   padding: 3px 11px;
   letter-spacing: 0.03em;
   transition: background 0.2s;
 }
-.experience-item:hover .tag { background: var(--green-tint-2); }
+.experience-item:hover .tag { background: var(--accent-tint-2); }
 
 /* Resume link */
 .resume-link {
@@ -400,18 +399,18 @@ section {
   align-items: center;
   gap: 9px;
   margin-top: 28px;
-  color: var(--green);
+  color: var(--accent);
   font-family: var(--font-mono);
   font-size: 13px;
   text-decoration: none;
-  border: 1px solid rgba(74,242,200,0.3);
+  border: 1px solid rgba(232,176,75,0.3);
   padding: 11px 20px;
   border-radius: 6px;
   transition: all 0.25s ease;
 }
 .resume-link:hover {
-  background: var(--green-tint);
-  border-color: var(--green);
+  background: var(--accent-tint);
+  border-color: var(--accent);
   gap: 14px;
 }
 .resume-link svg { width: 15px; height: 15px; }
@@ -429,7 +428,7 @@ section {
   position: relative;
 }
 .project-card:hover {
-  background: var(--navy-3);
+  background: var(--bg-3);
   border-color: var(--border-hover);
   transform: translateX(4px);
 }
@@ -437,7 +436,7 @@ section {
 .project-label {
   font-family: var(--font-mono);
   font-size: 10.5px;
-  color: var(--green);
+  color: var(--accent);
   letter-spacing: 0.08em;
   text-transform: uppercase;
   margin-bottom: 10px;
@@ -454,7 +453,7 @@ section {
 .project-title {
   font-size: 17px;
   font-weight: 600;
-  color: var(--slate-lighter);
+  color: var(--muted-lighter);
   display: flex;
   align-items: center;
   gap: 10px;
@@ -470,7 +469,7 @@ section {
   gap: 8px;
   transition: color 0.25s;
 }
-.project-title a:hover { color: var(--green); }
+.project-title a:hover { color: var(--accent); }
 /* arrow icon on title */
 .project-title a::after {
   content: '↗';
@@ -478,7 +477,7 @@ section {
   opacity: 0;
   transform: translate(-4px, 4px);
   transition: opacity 0.25s, transform 0.25s var(--ease-out);
-  color: var(--green);
+  color: var(--accent);
 }
 .project-card:hover .project-title a::after {
   opacity: 1;
@@ -491,103 +490,18 @@ section {
   flex-shrink: 0;
 }
 .project-link {
-  color: var(--slate);
+  color: var(--muted);
   transition: color 0.25s, transform 0.25s var(--ease-spring);
   display: flex;
 }
-.project-link:hover { color: var(--green); transform: translateY(-2px); }
+.project-link:hover { color: var(--accent); transform: translateY(-2px); }
 .project-link svg { width: 19px; height: 19px; }
 
 .project-description {
   font-size: 13.5px;
   line-height: 1.65;
-  color: var(--slate);
+  color: var(--muted);
   margin-bottom: 16px;
-}
-
-/* ---- CASE STUDY (Cinema Booking) ---- */
-.case-study {
-  margin-top: 18px;
-  border-top: 1px solid var(--border);
-  padding-top: 18px;
-}
-.case-study-label {
-  font-family: var(--font-mono);
-  font-size: 10px;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  color: var(--purple);
-  margin-bottom: 14px;
-}
-.case-study-grid {
-  display: grid;
-  grid-template-columns: repeat(3,1fr);
-  gap: 10px;
-}
-.case-tile {
-  background: var(--navy-4);
-  border: 1px solid var(--border);
-  border-radius: 6px;
-  padding: 12px 14px;
-  transition: border-color 0.25s;
-}
-.project-card:hover .case-tile { border-color: rgba(167,139,250,0.2); }
-.case-tile-label {
-  font-family: var(--font-mono);
-  font-size: 9.5px;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: var(--slate);
-  margin-bottom: 6px;
-}
-.case-tile-val {
-  font-size: 18px;
-  font-weight: 700;
-  color: var(--purple);
-  line-height: 1;
-}
-.case-tile-desc {
-  font-size: 11px;
-  color: var(--slate);
-  margin-top: 4px;
-}
-.case-steps {
-  display: flex;
-  gap: 0;
-  margin-top: 12px;
-  border-radius: 6px;
-  overflow: hidden;
-}
-.case-step {
-  flex: 1;
-  padding: 9px 10px;
-  background: var(--navy-4);
-  border-right: 1px solid var(--border);
-  font-size: 11px;
-  color: var(--slate-light);
-  text-align: center;
-  position: relative;
-}
-.case-step:last-child { border-right: none; }
-.case-step-num {
-  display: block;
-  font-family: var(--font-mono);
-  font-size: 9px;
-  color: var(--purple);
-  margin-bottom: 3px;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-}
-/* Arrow between steps */
-.case-step:not(:last-child)::after {
-  content: '→';
-  position: absolute;
-  right: -8px;
-  top: 50%;
-  transform: translateY(-50%);
-  color: var(--border);
-  font-size: 12px;
-  z-index: 1;
 }
 
 /* =============================================
@@ -612,25 +526,25 @@ section {
   display: flex;
   align-items: center;
   gap: 10px;
-  background: var(--navy-3);
-  border: 1px solid rgba(74,242,200,0.35);
+  background: var(--bg-3);
+  border: 1px solid rgba(232,176,75,0.35);
   border-radius: 999px;
   padding: 12px 22px;
-  color: var(--green);
+  color: var(--accent);
   font-family: var(--font-mono);
   font-size: 12px;
   font-weight: 500;
   text-decoration: none;
   cursor: pointer;
-  box-shadow: 0 8px 32px rgba(0,0,0,0.5), 0 0 0 1px rgba(74,242,200,0.05);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.5), 0 0 0 1px rgba(232,176,75,0.05);
   transition: background 0.25s, border-color 0.25s, transform 0.25s var(--ease-spring), box-shadow 0.25s;
   letter-spacing: 0.04em;
 }
 .float-cta-btn:hover {
-  background: var(--green-tint-2);
-  border-color: var(--green);
+  background: var(--accent-tint-2);
+  border-color: var(--accent);
   transform: scale(1.04);
-  box-shadow: 0 12px 40px rgba(74,242,200,0.15), 0 0 0 1px rgba(74,242,200,0.1);
+  box-shadow: 0 12px 40px rgba(232,176,75,0.15), 0 0 0 1px rgba(232,176,75,0.1);
 }
 .float-cta-btn span.arrow {
   font-size: 14px;
@@ -648,10 +562,10 @@ footer {
 .footer-text {
   font-family: var(--font-mono);
   font-size: 11.5px;
-  color: var(--slate);
+  color: var(--muted);
 }
 .footer-text a {
-  color: var(--green);
+  color: var(--accent);
   text-decoration: none;
 }
 .footer-text a:hover { text-decoration: underline; }
@@ -660,12 +574,12 @@ footer {
    SCROLLBAR STYLING
    ============================================= */
 ::-webkit-scrollbar { width: 6px; }
-::-webkit-scrollbar-track { background: var(--navy); }
+::-webkit-scrollbar-track { background: var(--bg); }
 ::-webkit-scrollbar-thumb {
-  background: var(--navy-4);
+  background: var(--bg-4);
   border-radius: 3px;
 }
-::-webkit-scrollbar-thumb:hover { background: var(--slate); }
+::-webkit-scrollbar-thumb:hover { background: var(--muted); }
 
 /* =============================================
    MUSIC TOGGLE BUTTON
@@ -678,11 +592,11 @@ footer {
   display: flex;
   align-items: center;
   gap: 10px;
-  background: var(--navy-3);
-  border: 1px solid rgba(74,242,200,0.2);
+  background: var(--bg-3);
+  border: 1px solid rgba(232,176,75,0.2);
   border-radius: 999px;
   padding: 10px 18px;
-  color: var(--slate);
+  color: var(--muted);
   font-family: var(--font-mono);
   font-size: 11px;
   text-transform: uppercase;
@@ -693,15 +607,15 @@ footer {
 }
 
 .music-toggle-btn:hover {
-  border-color: var(--green);
-  color: var(--green);
+  border-color: var(--accent);
+  color: var(--accent);
   transform: translateY(-2px);
 }
 
 .music-toggle-btn.is-playing {
-  border-color: var(--green);
-  color: var(--green);
-  background: var(--green-tint);
+  border-color: var(--accent);
+  color: var(--accent);
+  background: var(--accent-tint);
 }
 
 /* Equalizer Animation */
@@ -713,7 +627,7 @@ footer {
 }
 .equalizer .bar {
   width: 3px;
-  background-color: var(--slate);
+  background-color: var(--muted);
   border-radius: 2px;
   transition: background-color 0.3s;
 }
@@ -724,7 +638,7 @@ footer {
 
 /* Playing state */
 .music-toggle-btn.is-playing .equalizer .bar {
-  background-color: var(--green);
+  background-color: var(--accent);
   animation: eq-bounce 0.8s infinite alternate ease-in-out;
 }
 .music-toggle-btn.is-playing .equalizer .bar:nth-child(1) { animation-delay: 0.1s; }
@@ -736,11 +650,8 @@ footer {
   100% { height: 12px; }
 }
 
-/* Responsive adjustment for small screens */
 @media (max-width: 768px) {
-  .music-toggle-btn { bottom: 20px; left: 16px; padding: 8px 14px; }
-  /* Adjust mascot position if it overlaps with the button */
-  #mascot { bottom: 70px; left: 16px; } 
+  .music-toggle-btn { bottom: 20px; left: 16px; right: auto; padding: 8px 14px; }
 }
 
 /* =============================================
@@ -762,15 +673,15 @@ footer {
 .mascot-body {
   width: 56px;
   height: 50px;
-  background: var(--navy-3);
-  border: 2px solid var(--green);
+  background: var(--bg-3);
+  border: 2px solid var(--accent);
   border-radius: 40% 40% 45% 45%;
   position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 10px 25px rgba(74, 242, 200, 0.15);
+  box-shadow: 0 10px 25px rgba(232, 176, 75, 0.15);
 }
 
 .mascot-eyes {
@@ -782,7 +693,7 @@ footer {
 .m-eye {
   width: 7px;
   height: 7px;
-  background: var(--green);
+  background: var(--accent);
   border-radius: 50%;
   animation: blinkMascot 4s infinite;
   transition: all 0.2s;
@@ -791,7 +702,7 @@ footer {
 .mascot-mouth {
   width: 10px;
   height: 3px;
-  border: 2px solid var(--green);
+  border: 2px solid var(--accent);
   border-top: none;
   border-radius: 0 0 10px 10px;
   margin-top: 6px;
@@ -802,8 +713,8 @@ footer {
 .mascot-hand {
   width: 12px;
   height: 12px;
-  background: var(--navy-3);
-  border: 2px solid var(--green);
+  background: var(--bg-3);
+  border: 2px solid var(--accent);
   border-radius: 50%;
   position: absolute;
   top: 26px;
@@ -816,8 +727,8 @@ footer {
 .mascot-leg {
   width: 12px;
   height: 16px;
-  background: var(--navy-3);
-  border: 2px solid var(--green);
+  background: var(--bg-3);
+  border: 2px solid var(--accent);
   border-radius: 10px; /* Cute pill shape */
   position: absolute;
   bottom: -10px;
@@ -885,7 +796,7 @@ footer {
 /* Legs tuck upwards into the body when jumping */
 #mascot.is-clicking .mascot-leg {
   transform: translateY(-8px);
-  height: 10px; 
+  height: 10px;
 }
 
 /* =============================================
@@ -931,7 +842,6 @@ footer {
   section { margin-bottom: 72px; }
   .experience-item { grid-template-columns: 1fr; gap: 6px; }
   .experience-date { padding-top: 0; }
-  .case-study-grid { grid-template-columns: 1fr 1fr; }
   #float-cta { bottom: 20px; right: 16px; }
 }
 
@@ -939,11 +849,6 @@ footer {
   .layout { padding: 0 20px; }
   .sidebar-name { font-size: 32px; }
   .tech-grid { grid-template-columns: 1fr; }
-  .case-study-grid { grid-template-columns: 1fr; }
-  .case-steps { flex-direction: column; }
-  .case-step { border-right: none; border-bottom: 1px solid var(--border); }
-  .case-step:last-child { border-bottom: none; }
-  .case-step::after { display: none; }
   .project-card, .experience-item { padding: 16px 14px; }
 }
 
@@ -974,11 +879,11 @@ footer {
       <div class="m-eye"></div>
     </div>
     <div class="mascot-mouth"></div>
-    
+
     <!-- Hands -->
     <div class="mascot-hand left"></div>
     <div class="mascot-hand right"></div>
-    
+
     <!-- Legs -->
     <div class="mascot-leg left"></div>
     <div class="mascot-leg right"></div>
@@ -998,7 +903,7 @@ footer {
 </audio>
 
 <!-- Music Toggle Button -->
-<button id="music-toggle" class="music-toggle-btn" aria-label="Play background music">
+<button id="music-toggle" class="music-toggle-btn" aria-label="Toggle background music">
   <span class="music-text">Music: Off</span>
   <!-- Equalizer animation bars -->
   <div class="equalizer">
@@ -1194,9 +1099,9 @@ footer {
 
       <div class="projects-list">
 
-        <!-- Recent GitHub Projects -->
+        <!-- Cinema -->
         <article class="project-card reveal">
-          <p class="project-label">Recent GitHub Project</p>
+          <p class="project-label">Featured Project</p>
           <div class="project-header">
             <h3 class="project-title">
               <a href="https://github.com/Dipesh038/Cinema" target="_blank" rel="noopener noreferrer">
@@ -1205,7 +1110,7 @@ footer {
             </h3>
             <div class="project-links">
               <a href="https://github.com/Dipesh038/Cinema" target="_blank" rel="noopener noreferrer"
-                 class="project-link" aria-label="View on GitHub">
+                 class="project-link" aria-label="View Cinema on GitHub">
                 <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                   <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
                 </svg>
@@ -1213,21 +1118,21 @@ footer {
             </div>
           </div>
           <p class="project-description">
-            A recent JavaScript project focused on cinema and movie experiences.
-            The repo reflects the latest direction of your public GitHub work and gives the portfolio
-            a more current snapshot of what you are building.
+            A seat-booking app for movie theatres — pick a showtime, choose your seats from an
+            interactive hall layout, and watch the total update in real time. I built it in
+            vanilla JavaScript to keep full control over the booking state, with no framework
+            in between.
           </p>
           <ul class="tag-list">
             <li class="tag">JavaScript</li>
-            <li class="tag">GitHub Repo</li>
-            <li class="tag">UI</li>
-            <li class="tag">Frontend</li>
+            <li class="tag">HTML / CSS</li>
+            <li class="tag">State Management</li>
           </ul>
         </article>
 
         <!-- Smart Leads Dashboard -->
         <article class="project-card reveal delay-1">
-          <p class="project-label">Recent GitHub Project</p>
+          <p class="project-label">Featured Project</p>
           <div class="project-header">
             <h3 class="project-title">
               <a href="https://github.com/Dipesh038/-Smart-Leads-Dashboard" target="_blank" rel="noopener noreferrer">
@@ -1236,7 +1141,7 @@ footer {
             </h3>
             <div class="project-links">
               <a href="https://github.com/Dipesh038/-Smart-Leads-Dashboard" target="_blank" rel="noopener noreferrer"
-                 class="project-link" aria-label="View on GitHub">
+                 class="project-link" aria-label="View Smart Leads Dashboard on GitHub">
                 <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                   <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
                 </svg>
@@ -1244,29 +1149,29 @@ footer {
             </div>
           </div>
           <p class="project-description">
-            A TypeScript dashboard concept for tracking and organizing leads.
-            It reads like an admin-style productivity tool and fits well as a current portfolio highlight.
+            An admin-style dashboard for capturing and organising sales leads. This one was my
+            exercise in building data-heavy UI with TypeScript — tables, filters, and status
+            views that stay readable as the pipeline grows.
           </p>
           <ul class="tag-list">
             <li class="tag">TypeScript</li>
-            <li class="tag">Dashboard</li>
-            <li class="tag">Productivity</li>
-            <li class="tag">UI</li>
+            <li class="tag">Dashboard UI</li>
+            <li class="tag">Data Tables</li>
           </ul>
         </article>
 
         <!-- AI -->
         <article class="project-card reveal delay-2">
-          <p class="project-label">Recent GitHub Project</p>
+          <p class="project-label">Ongoing Experiment</p>
           <div class="project-header">
             <h3 class="project-title">
               <a href="https://github.com/Dipesh038/AI" target="_blank" rel="noopener noreferrer">
-                AI
+                AI Playground
               </a>
             </h3>
             <div class="project-links">
               <a href="https://github.com/Dipesh038/AI" target="_blank" rel="noopener noreferrer"
-                 class="project-link" aria-label="View on GitHub">
+                 class="project-link" aria-label="View AI Playground on GitHub">
                 <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                   <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
                 </svg>
@@ -1274,30 +1179,28 @@ footer {
             </div>
           </div>
           <p class="project-description">
-            A JavaScript project from your GitHub profile that sits in the AI experimentation space.
-            I kept the description concise so the portfolio stays credible without overpromising details
-            that are not visible in the repo name alone.
+            My sandbox for frontend AI experiments — small prototypes exploring how AI features
+            can fit into everyday interfaces. Deliberately scrappy: ideas get tested here first,
+            and the good ones graduate into real projects.
           </p>
           <ul class="tag-list">
             <li class="tag">JavaScript</li>
-            <li class="tag">Experiment</li>
-            <li class="tag">GitHub Repo</li>
-            <li class="tag">Prototype</li>
+            <li class="tag">Prototyping</li>
           </ul>
         </article>
 
         <!-- StreamingWebseries -->
         <article class="project-card reveal delay-3">
-          <p class="project-label">Recent GitHub Project</p>
+          <p class="project-label">Featured Project</p>
           <div class="project-header">
             <h3 class="project-title">
               <a href="https://github.com/Dipesh038/StreamingWebseries" target="_blank" rel="noopener noreferrer">
-                StreamingWebseries
+                Streaming Webseries
               </a>
             </h3>
             <div class="project-links">
               <a href="https://github.com/Dipesh038/StreamingWebseries" target="_blank" rel="noopener noreferrer"
-                 class="project-link" aria-label="View on GitHub">
+                 class="project-link" aria-label="View Streaming Webseries on GitHub">
                 <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                   <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
                 </svg>
@@ -1305,14 +1208,14 @@ footer {
             </div>
           </div>
           <p class="project-description">
-            A TypeScript repository centered on streaming and web series browsing.
-            It rounds out the projects section with another current GitHub repo from your profile.
+            A streaming-style web app for browsing web series — cover-art grids, detail pages,
+            and a responsive layout that holds up from phone to desktop. Written in TypeScript
+            as a study of how the big streaming platforms structure their browse experience.
           </p>
           <ul class="tag-list">
             <li class="tag">TypeScript</li>
-            <li class="tag">Streaming</li>
+            <li class="tag">Responsive Design</li>
             <li class="tag">Web App</li>
-            <li class="tag">Frontend</li>
           </ul>
         </article>
 
@@ -1358,7 +1261,7 @@ footer {
       vx: rand(-0.18, 0.18), vy: rand(-0.18, 0.18),
       r: rand(1, 2.2),
       opacity: rand(0.15, 0.55),
-      color: Math.random() > 0.75 ? '74,242,200' : '167,139,250'
+      color: Math.random() > 0.75 ? '232,176,75' : '201,123,95'
     };
   }
 
@@ -1382,7 +1285,7 @@ footer {
           ctx.beginPath();
           ctx.moveTo(p.x, p.y);
           ctx.lineTo(q.x, q.y);
-          ctx.strokeStyle = `rgba(74,242,200,${alpha})`;
+          ctx.strokeStyle = `rgba(232,176,75,${alpha})`;
           ctx.lineWidth = 0.6;
           ctx.stroke();
         }
@@ -1437,7 +1340,7 @@ footer {
    TYPEWRITER EFFECT
    ============================================= */
 (function () {
-  const titles = ['Frontend Developer', 'UI Craftsman', 'Three.js Explorer', 'Accessibility Advocate'];
+  const titles = ['Frontend Developer', 'UI Engineer', 'Three.js Explorer', 'CS Student @ PDEU'];
   const el = document.getElementById('typed-title');
   if (!el) return;
   let ti = 0, ci = 0, deleting = false;
@@ -1605,11 +1508,11 @@ footer {
       mascot.classList.add('is-hovering');
       playHoverSound();
     });
-    
+
     el.addEventListener('mouseleave', () => {
       mascot.classList.remove('is-hovering');
     });
-    
+
     el.addEventListener('mousedown', () => {
       mascot.classList.add('is-clicking');
       playClickSound();
@@ -1638,8 +1541,8 @@ window.addEventListener('load', () => {
   if (!audio || !toggleBtn) return;
 
   // Set default volume low so it's "chill"
-  const MAX_VOLUME = 0.3; 
-  audio.volume = 0; 
+  const MAX_VOLUME = 0.3;
+  audio.volume = 0;
   let fadeInterval;
 
   function fadeAudio(targetVolume, duration = 1000) {
@@ -1653,10 +1556,10 @@ window.addEventListener('load', () => {
       // Clamp volume between 0 and MAX_VOLUME
       if (newVolume > MAX_VOLUME) newVolume = MAX_VOLUME;
       if (newVolume < 0) newVolume = 0;
-      
+
       audio.volume = newVolume;
 
-      if ((volumeStep > 0 && audio.volume >= targetVolume) || 
+      if ((volumeStep > 0 && audio.volume >= targetVolume) ||
           (volumeStep < 0 && audio.volume <= targetVolume)) {
         clearInterval(fadeInterval);
         if (targetVolume === 0) audio.pause();
@@ -1682,7 +1585,7 @@ window.addEventListener('load', () => {
     localStorage.setItem('portfolio_music', 'muted');
   }
 
-toggleBtn.addEventListener('click', (e) => {
+  toggleBtn.addEventListener('click', (e) => {
     e.stopPropagation(); // Prevents this click from triggering the global click listener below
     if (audio.paused || audio.volume === 0) {
       playMusic();
@@ -1693,7 +1596,7 @@ toggleBtn.addEventListener('click', (e) => {
 
   // Check memory on load. If it's their first time visiting, default to 'playing'
   let savedState = localStorage.getItem('portfolio_music');
-  
+
   if (savedState === null) {
     savedState = 'playing'; // Default state for new visitors
   }
