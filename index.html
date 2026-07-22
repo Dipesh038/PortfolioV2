@@ -1005,9 +1005,32 @@ footer {
 
 /* Responsive adjustment for small screens */
 @media (max-width: 768px) {
-  .music-toggle-btn { bottom: 20px; left: 16px; padding: 8px 14px; }
+  .music-toggle-btn {
+    bottom: 18px;
+    left: 16px;
+    width: 44px;
+    height: 44px;
+    justify-content: center;
+    gap: 0;
+    padding: 0;
+    border-radius: 50%;
+  }
+  .music-toggle-btn .music-text {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+  .equalizer {
+    height: 14px;
+    gap: 3px;
+  }
+  .equalizer .bar { width: 4px; }
   /* Adjust mascot position if it overlaps with the button */
-  #mascot { bottom: 70px; left: 16px; } 
+  #mascot { bottom: 74px; left: 16px; }
 }
 
 /* =============================================
@@ -1524,7 +1547,7 @@ footer {
               Your browser does not support the video tag.
             </video>
             <div class="project-demo-overlay" aria-hidden="true">
-              <span class="project-demo-pill">Hover preview</span>
+              <span class="project-demo-pill">Preview</span>
               <span class="project-demo-duration">23 sec</span>
             </div>
             <span class="project-demo-play" aria-hidden="true">
@@ -1579,7 +1602,7 @@ footer {
               Your browser does not support the video tag.
             </video>
             <div class="project-demo-overlay" aria-hidden="true">
-              <span class="project-demo-pill">Hover preview</span>
+              <span class="project-demo-pill">Preview</span>
               <span class="project-demo-duration">15 sec</span>
             </div>
             <span class="project-demo-play" aria-hidden="true">
@@ -1925,17 +1948,27 @@ footer {
 })();
 
 /* =============================================
-   AI PROJECT HOVER VIDEO
+   PROJECT PREVIEW VIDEOS
    ============================================= */
 (function () {
   const hoverVideos = document.querySelectorAll('[data-hover-video]');
+  if (!hoverVideos.length) return;
+
+  const isTouchDevice = window.matchMedia('(hover: none), (pointer: coarse)').matches;
 
   hoverVideos.forEach(video => {
     const preview = video.closest('.project-demo');
     if (!preview) return;
 
+    video.muted = true;
+    video.defaultMuted = true;
+    video.playsInline = true;
+    video.setAttribute('muted', '');
+    video.setAttribute('playsinline', '');
+
     const playPreview = () => {
       video.muted = true;
+      video.defaultMuted = true;
       preview.classList.add('is-playing');
       const playAttempt = video.play();
       if (playAttempt) {
@@ -1943,16 +1976,38 @@ footer {
       }
     };
 
-    const stopPreview = () => {
+    const stopPreview = (reset = true) => {
       video.pause();
-      video.currentTime = 0;
+      if (reset) video.currentTime = 0;
       preview.classList.remove('is-playing');
     };
 
+    if (isTouchDevice) {
+      video.preload = 'auto';
+      video.setAttribute('autoplay', '');
+
+      if ('IntersectionObserver' in window) {
+        const observer = new IntersectionObserver(entries => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) playPreview();
+            else stopPreview(false);
+          });
+        }, { threshold: 0.45 });
+
+        observer.observe(preview);
+      } else {
+        playPreview();
+      }
+
+      preview.addEventListener('touchstart', playPreview, { passive: true });
+      preview.addEventListener('click', playPreview);
+      return;
+    }
+
     preview.addEventListener('mouseenter', playPreview);
     preview.addEventListener('focusin', playPreview);
-    preview.addEventListener('mouseleave', stopPreview);
-    preview.addEventListener('focusout', stopPreview);
+    preview.addEventListener('mouseleave', () => stopPreview());
+    preview.addEventListener('focusout', () => stopPreview());
     preview.addEventListener('click', () => {
       if (video.paused) playPreview();
       else stopPreview();
@@ -2005,6 +2060,7 @@ window.addEventListener('load', () => {
   function playMusic() {
     audio.play().then(() => {
       toggleBtn.classList.add('is-playing');
+      toggleBtn.setAttribute('aria-label', 'Pause background music');
       btnText.textContent = 'Music: On';
       fadeAudio(MAX_VOLUME);
       localStorage.setItem('portfolio_music', 'playing');
@@ -2015,6 +2071,7 @@ window.addEventListener('load', () => {
 
   function pauseMusic() {
     toggleBtn.classList.remove('is-playing');
+    toggleBtn.setAttribute('aria-label', 'Play background music');
     btnText.textContent = 'Music: Off';
     fadeAudio(0);
     localStorage.setItem('portfolio_music', 'muted');
@@ -2051,6 +2108,7 @@ toggleBtn.addEventListener('click', (e) => {
     // We try to play it immediately just in case the browser allows it
     audio.play().then(() => {
       toggleBtn.classList.add('is-playing');
+      toggleBtn.setAttribute('aria-label', 'Pause background music');
       btnText.textContent = 'Music: On';
       fadeAudio(MAX_VOLUME);
       localStorage.setItem('portfolio_music', 'playing');
